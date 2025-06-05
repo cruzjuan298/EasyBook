@@ -1,0 +1,6 @@
+# node and frontend ignores
+frontend/node_modules/
+frontend/.next
+
+# node and backend ignores
+backend/node_modules
