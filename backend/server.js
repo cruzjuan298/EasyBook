@@ -1,15 +1,14 @@
 const express = require("express")
+// import all app routes below
+const bookRoute = require("./app/api/routes/Book.js")
 
 const app = express()
 
 // backend will use port 8000
 const PORT = 8000
 
-app.get('/', (req, res) => {
-    res.status(200)
-    res.send("Welcome to the root of the URL server");
-})
 
+app.use("/", bookRoute)
 app.listen(PORT, (error) => {
     if (!error) { 
         console.log("Server has successfully started and App is listening on port " + PORT);

@@ -8,6 +8,10 @@ install:
 	cd frontend && npm install
 	@echo "All dependencies have been installed"
 
+run-backend:
+	@echo "Starting the backend server"
+	cd backend && node server.js
+
 build-frontend:
 	@echo "Building the frontend"
 	cd frontend && npm run build
@@ -15,6 +19,13 @@ build-frontend:
 run-frontend:
 	@echo "Running frontend"
 	cd frontend && npm run dev -- --port 3000
+
+build-frontend:
+	@echo "Building frontend"
+	cd frontend && npm run build
+
+start:
+	 concurrently "make run-frontend" "make run-backend"
 
 clean:
 	@echo "Cleanning node modules"
