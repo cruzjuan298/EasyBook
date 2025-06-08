@@ -1,9 +1,9 @@
-import styles from "./calenderview.module.css"
+import styles from "./calenderView.module.css"
 
 export default function CalenderView() {
     return(
         <div>
-            
+
         </div>
     )
 }
