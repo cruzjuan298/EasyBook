@@ -5,7 +5,7 @@ export default function List({ appointments }){
     const dateTitle = currentDate.toDateString();
     return(
         <div className={styles.listDiv}>
-            <h2 className={styles.listTitle}>dateTitle</h2>
+            <h2 className={styles.listTitle}>{dateTitle}</h2>
         </div>
     )
 }

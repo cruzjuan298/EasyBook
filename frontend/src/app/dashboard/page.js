@@ -1,15 +1,30 @@
 'use client'
 
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import styles from "./page.module.css"
 import BoardView from "../../components/BoardView/BoardView.js"
 import CalenderView from "../../components/CalenderView/CalenderView.js"
 import ListView from "../../components/ListView/ListView.js"
 
 export default function DashboardPage(){
-    const router = useRouter()
+    const router = useRouter();
     
-    
+    const [view, setView] = useState("calender");
+
+    const renderView = (view) => {
+        switch (view) {
+            case "calender":
+                return <CalenderView />
+            case "list":
+                return <ListView />
+            case "board":
+                return <BoardView />
+            default:
+                return <CalenderView />
+        }
+    };
+
     return(
         <div className={styles.dashboardDiv}>
             <header className={styles.dashboardHeader}>
@@ -26,9 +41,12 @@ export default function DashboardPage(){
                 </div>
             </header>
                 <div className={styles.dashboardToggle} id={styles.dashboardView}>
-                    <button type="button" className={styles.toggleButton}>Calender</button>
-                    <button type="button" className={styles.toggleButton}>List</button>
-                    <button type="button" className={styles.toggleButton}>Board</button>
+                    <button type="button" className={styles.toggleButton} onClick={() => setView("calender")}>Calender</button>
+                    <button type="button" className={styles.toggleButton} onClick={() => setView("list")}>List</button>
+                    <button type="button" className={styles.toggleButton} onClick={() => setView("board")}>Board</button>
+                </div>
+                <div className={styles.viewDiv}>
+                        {renderView(view)}
                 </div>
         </div>
     )

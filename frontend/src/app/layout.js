@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "mock home page",
+  title: "Book me - The scheduling app for small business",
   description: "this is a mock home page for testing purpose",
 };
 

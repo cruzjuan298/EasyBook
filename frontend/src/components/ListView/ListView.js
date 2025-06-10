@@ -1,9 +1,10 @@
 import styles from "./listview.module.css"
 
 export default function ListView() {
+    
     return(
         <div className={styles.listViewDiv}>
-            <h1>Upcoming Appointments</h1>
+            <h1 className={styles.listTitle}>Upcoming Appointments</h1>
         </div>
     )
 }
