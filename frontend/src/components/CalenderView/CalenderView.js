@@ -1,4 +1,4 @@
-import styles from "./calenderView.module.css"
+import styles from "../../styles/calenderView.module.css"
 
 export default function CalenderView() {
     return(

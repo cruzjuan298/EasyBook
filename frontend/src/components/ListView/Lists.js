@@ -1,4 +1,4 @@
-import styles from "./list.module.css"
+import styles from "../../list.module.css"
 
 export default function List({ appointments }){
     const currentDate = new Date();

@@ -1,4 +1,4 @@
-import styles from "./listview.module.css"
+import styles from "../../styles/listview.module.css"
 
 export default function ListView() {
     
