@@ -1,8 +1,8 @@
-const express = require("express")
+import express from "express"
 const router = express.Router()
 
 router.get("/book", (req, res, next) => {
     res.send("Testing api endpoint")
 })
 
-module.exports = router 
+export const bookRoute = router

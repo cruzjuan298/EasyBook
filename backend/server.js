@@ -1,6 +1,6 @@
-const express = require("express")
+import express from 'express'
 // import all app routes below
-const bookRoute = require("./app/api/routes/Book.js")
+import { bookRoute } from "./app/api/routes/Book.js"
 
 const app = express()
 

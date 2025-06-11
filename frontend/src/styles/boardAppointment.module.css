@@ -1,3 +1,20 @@
-.bAppointmenDiv{
+.bAppointmentDiv {
+    background-color: white;
+    padding: 0.75rem;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); 
     border-width: 1px;
+    border-radius: 0.375rem;
+    box-sizing: border-box;
+    margin-bottom: 1.75rem;
+    font-weight: 500;
 }
+
+.appointmentTitle {
+    font-size: 1rem;
+}
+
+.date {
+    font-size: 0.875rem;
+    color: rgb(107, 114, 128);
+}
+
