@@ -4,3 +4,5 @@ frontend/.next
 
 # node and backend ignores
 backend/node_modules
+
+todo.txt
