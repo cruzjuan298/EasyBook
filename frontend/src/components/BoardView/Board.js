@@ -1,12 +1,10 @@
 import { useState } from "react"
 import styles from "../../styles/board.module.css"
 import BoardAppointment from "./BoardAppointment"
-import AddUI from "./AddUI"
 
-export default function Board({ title }){
+export default function Board({ title, addBookingUI }){
     let initialAppointments = [];
     const [appointments, setAppointments] = useState(initialAppointments)
-    const [addUI, setAddUIState] =useState(false)
 
     // key is only for testing purposes
     function addBooking({title, date, description}){
@@ -22,7 +20,7 @@ export default function Board({ title }){
             <div className={styles.appointments}>
                 {appointments}
             </div>
-            <button className={styles.addBookingButton} onClick={() => setAddUIState(true)}>
+            <button className={styles.addBookingButton} onClick={addBookingUI}>
             + Add Booking
             </button>
         </div>

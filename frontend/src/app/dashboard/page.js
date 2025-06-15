@@ -6,11 +6,18 @@ import styles from "./page.module.css"
 import BoardView from "../../components/BoardView/BoardView.js"
 import CalenderView from "../../components/CalenderView/CalenderView.js"
 import ListView from "../../components/ListView/ListView.js"
+import AddUI from "@/components/BoardView/AddUI"
 
 export default function DashboardPage(){
     const router = useRouter();
     
     const [view, setView] = useState("calender");
+
+    const [showAddAppointment, setShowAddAppointment] = useState(false)
+
+    const handleAddBookingClick = () => {
+        setShowAddAppointment(true)
+    }
 
     const renderView = (view) => {
         switch (view) {
@@ -19,7 +26,7 @@ export default function DashboardPage(){
             case "list":
                 return <ListView />
             case "board":
-                return <BoardView />
+                return <BoardView onAddBookingClick={handleAddBookingClick} />
             default:
                 return <CalenderView />
         }
@@ -47,6 +54,7 @@ export default function DashboardPage(){
                 </div>
                 <div className={styles.viewDiv}>
                         {renderView(view)}
+                        {showAddAppointment && (<AddUI />) }
                 </div>
         </div>
     )
