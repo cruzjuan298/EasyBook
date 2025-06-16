@@ -1,4 +1,95 @@
-.addDiv{
+.addDiv {
+    max-width: 28rem;
+    padding: 2rem;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.newTitle {
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111827;
     text-align: center;
+}
+
+.titleDiv,
+.serviceDiv,
+.staffMemberDiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.clientInput,
+.serviceInput,
+.dateInput,
+.timeInput,
+.staffMemberInput {
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+.timeElementsDiv {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.dateDiv,
+.timeDiv {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmDiv {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.cancelButton,
+.createButton {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cancelButton {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.cancelButton:hover {
+    background-color: #e5e7eb;
+}
+
+.createButton {
+    background-color: #3b82f6;
+    color: #fff;
+}
+
+.createButton:hover {
+    background-color: #2563eb;
+}
+
+:global(button),
+:global(input),
+:global(select),
+:global(textarea) {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+
 }
 

@@ -59,7 +59,7 @@ export default function DashboardPage(){
                 </div>
                 <div className={styles.viewDiv}>
                         {renderView(view)}
-                        {<Modal isOpen={showAddAppointment} onClose={handleClose} children={<AddUI />} />} 
+                        {<Modal isOpen={showAddAppointment} children={<AddUI onCloseAUI={handleClose} />} />} 
                 </div>
         </div>
     )
