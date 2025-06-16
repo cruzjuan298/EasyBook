@@ -1,23 +1,28 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import styles from "./page.module.css"
 import BoardView from "../../components/BoardView/BoardView.js"
 import CalenderView from "../../components/CalenderView/CalenderView.js"
 import ListView from "../../components/ListView/ListView.js"
-import AddUI from "@/components/BoardView/AddUI"
+import Modal from "@/components/Modal-AddUI/Modal"
+import AddUI from "@/components/Modal-AddUI/AddUI"
 
 export default function DashboardPage(){
-    const router = useRouter();
     
     const [view, setView] = useState("calender");
 
     const [showAddAppointment, setShowAddAppointment] = useState(false)
 
-    const handleAddBookingClick = () => {
+    const handleOpen= () => {
         setShowAddAppointment(true)
     }
+
+    const handleClose= () => {
+        setShowAddAppointment(false)
+    }
+
 
     const renderView = (view) => {
         switch (view) {
@@ -26,7 +31,7 @@ export default function DashboardPage(){
             case "list":
                 return <ListView />
             case "board":
-                return <BoardView onAddBookingClick={handleAddBookingClick} />
+                return <BoardView onAddBookingClick={handleOpen} />
             default:
                 return <CalenderView />
         }
@@ -54,7 +59,7 @@ export default function DashboardPage(){
                 </div>
                 <div className={styles.viewDiv}>
                         {renderView(view)}
-                        {showAddAppointment && (<AddUI />) }
+                        {<Modal isOpen={showAddAppointment} onClose={handleClose} children={<AddUI />} />} 
                 </div>
         </div>
     )
