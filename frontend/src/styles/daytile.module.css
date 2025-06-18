@@ -1,0 +1,8 @@
+.dayTileDiv {
+    border-width: 1px;
+    overflow: hidden;
+    cursor: pointer;
+    height: 7rem;
+    background-color: rgb(243 244 246);
+    padding: 0.25rem;
+}
