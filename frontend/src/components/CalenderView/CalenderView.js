@@ -15,6 +15,10 @@ export default function CalenderView() {
             </div>
             <div className={styles.DayTilesDiv}>
                 <DayRow />
+                <DayRow />
+                <DayRow />
+                <DayRow />
+                <DayRow />
             </div>
         </div>
     )
