@@ -10,3 +10,22 @@
     border-width: 0;
     border-bottom-width: 1px;
 }
+
+.changeMonthButton {
+    align-items: center;
+    display: flex;
+}
+
+.monthText{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 1.75rem;
+}
+
+.changeMonthButton {
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: rgb(255 255 255);
+}
