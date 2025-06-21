@@ -1,7 +1,7 @@
 import styles from "@/styles/dayGrid.module.css"
 import DayTile from "./DayTile"
  
-export default function DayGrid({ year, month }) {
+export default function DayGrid({ year, month, addBooking }) {
     const lastDay = new Date(year, month + 1, 0);
     const lastDayDate = lastDay.getDate();
 
@@ -28,7 +28,7 @@ export default function DayGrid({ year, month }) {
     return(
         <div className={styles.DayGridDiv}>
             {dayLists.map( (dayNumber, index) => (
-                <DayTile day={dayNumber}  key={index} />
+                <DayTile day={dayNumber}  key={index} padding={dayNumber === null} addBookingModal={addBooking} />
             ))}
         </div>
     )

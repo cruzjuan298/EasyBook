@@ -27,13 +27,13 @@ export default function DashboardPage(){
     const renderView = (view) => {
         switch (view) {
             case "calender":
-                return <CalenderView />
+                return <CalenderView onAddBookingClick={handleOpen}/>
             case "list":
                 return <ListView />
             case "board":
                 return <BoardView onAddBookingClick={handleOpen} />
             default:
-                return <CalenderView />
+                return <CalenderView onAddBookingClick={handleOpen}/>
         }
     };
 

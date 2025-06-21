@@ -2,7 +2,7 @@ import { useState } from "react"
 import styles from "../../styles/calenderView.module.css"
 import DayGrid from "./DayGrid"
 
-export default function CalenderView() {
+export default function CalenderView({ onAddBookingClick }) {
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth();
     let currentYear = currentDate.getFullYear();
@@ -50,7 +50,7 @@ export default function CalenderView() {
                 <div>Sat</div>
             </div>
             <div className={styles.DayTilesDiv}>
-                <DayGrid year={currentYearState} month={currentMonthState} />
+                <DayGrid year={currentYearState} month={currentMonthState} addBooking={onAddBookingClick} />
             </div>
         </div>
     )
