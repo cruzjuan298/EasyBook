@@ -1,6 +1,6 @@
 import styles from "../../styles/listview.module.css"
 
-export default function ListView() {
+export default function ListView({ time }) {
     
     return(
         <div className={styles.listViewDiv}>

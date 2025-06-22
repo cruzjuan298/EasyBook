@@ -1,11 +1,12 @@
 import styles from "@/styles/dayGrid.module.css"
 import DayTile from "./DayTile"
- 
+import { getSpecificDay } from "@/utils/Time/DateUItil";
+
 export default function DayGrid({ year, month, addBooking }) {
-    const lastDay = new Date(year, month + 1, 0);
+    const lastDay = getSpecificDay(year, month + 1, 0);
     const lastDayDate = lastDay.getDate();
 
-    const firstDay = new Date(year, month, 1);
+    const firstDay = getSpecificDay(year, month, 1);
     const firstDayDate = firstDay.getDay();
 
     let dayLists = [];

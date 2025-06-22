@@ -2,10 +2,10 @@ import { useState } from "react"
 import styles from "../../styles/calenderView.module.css"
 import DayGrid from "./DayGrid"
 
-export default function CalenderView({ onAddBookingClick }) {
-    let currentDate = new Date();
-    let currentMonth = currentDate.getMonth();
-    let currentYear = currentDate.getFullYear();
+export default function CalenderView({ onAddBookingClick, date, month, year }) {
+    let currentDate = date;
+    let currentMonth = month;
+    let currentYear = year;
 
     const [currentYearState, setCurrentYearState] = useState(currentYear);
     const [currentMonthState, setCurrentMonthState] = useState(currentMonth);

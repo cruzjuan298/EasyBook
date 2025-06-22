@@ -1,6 +1,6 @@
 import { useState } from "react"
 import styles from "../../styles/board.module.css"
-import BoardAppointment from "./BoardAppointment"
+import BoardAppointment from "../Appointments/BoardAppointment"
 
 export default function Board({ title, addBookingUI }){
     let initialAppointments = [];

@@ -8,9 +8,14 @@ import CalenderView from "../../components/CalenderView/CalenderView.js"
 import ListView from "../../components/ListView/ListView.js"
 import Modal from "@/components/Modal-AddUI/Modal"
 import AddUI from "@/components/Modal-AddUI/AddUI"
+import { getTime } from "@/utils/Time/DateUItil"
 
 export default function DashboardPage(){
     
+    var currentDate = getTime();
+    var currentMonth = currentDate.getMonth();
+    var currentYear = currentDate.getFullYear(); 
+
     const [view, setView] = useState("calender");
 
     const [showAddAppointment, setShowAddAppointment] = useState(false)
@@ -27,9 +32,9 @@ export default function DashboardPage(){
     const renderView = (view) => {
         switch (view) {
             case "calender":
-                return <CalenderView onAddBookingClick={handleOpen}/>
+                return <CalenderView onAddBookingClick={handleOpen} date={currentDate} month={currentMonth} year={currentYear} />
             case "list":
-                return <ListView />
+                return <ListView time={currentDate} />
             case "board":
                 return <BoardView onAddBookingClick={handleOpen} />
             default:
