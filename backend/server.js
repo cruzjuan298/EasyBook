@@ -1,11 +1,13 @@
 import express from 'express'
 // import all app routes below
 import { bookRoute } from "./app/api/routes/Book.js"
+import "dotenv/config"
+
 
 const app = express()
 
-// backend will use port 8000
-const PORT = 8000
+
+const PORT = process.env.PORT;
 
 
 app.use("/", bookRoute)

@@ -1,6 +1,9 @@
 import styles from "../../styles/addui.module.css"
+import config from "../../config"
 
 export default function AddUI({ onCloseAUI }){
+    const baseURL = config.api.baseURL;
+
     return(
         <div className={styles.addDiv}>
             <h1 className={styles.newTitle}>Create New Appointment</h1>

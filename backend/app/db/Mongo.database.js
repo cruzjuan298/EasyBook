@@ -3,7 +3,6 @@ import dotenv from "dotenv"
 
 dotenv.config({ path: "../../.env"})
 const uri = process.env.URI
-const MongoClient = mongodb.MongoClient;
 
 const client = new MongoClient(uri, {
   serverApi: {
