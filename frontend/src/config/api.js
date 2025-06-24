@@ -6,7 +6,7 @@ export const API_CONFIG = {
         "Accept" : "application/json",
     },
     endpoints: {
-        book: "/book",
+        book: "/api/book",
     },
     apiVersion: "v0.1",
 };
