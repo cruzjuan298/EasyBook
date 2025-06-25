@@ -1,7 +1,7 @@
 import express from "express"
 const router = express.Router()
 
-router.post("/book", (req, res, next) => {
+router.post("/book", async function bookAppointment(req, res, next) {
     const newAppointment = req.body;
     console.log(newAppointment);
 

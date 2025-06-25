@@ -1,8 +1,10 @@
 import styles from "../../styles/addui.module.css"
 import { API_CONFIG } from "@/config/api";
 import { useState } from "react";
+import { getNewDate, getTime } from "@/utils/Time/DateUItil";
 
 export default function AddUI({ onCloseAUI }){
+    const [error, setError] = useState({});
     const [formData, setFormData] = useState({
         title: "",
         service: "Haircut",
@@ -15,6 +17,15 @@ export default function AddUI({ onCloseAUI }){
     const bookEndpoint = API_CONFIG.endpoints.book;
     const fullUrl = `${baseURL}${bookEndpoint}`;
 
+    const unpackErrors = () => {
+        var errorMessage = ""
+        for(var key in error) {
+            var missingField = error[key] + " ";
+            errorMessage += missingField;
+        }
+        return errorMessage;
+    }
+
     const handleValueChange = (event) => {
         const { name, value } = event.target;
 
@@ -24,8 +35,52 @@ export default function AddUI({ onCloseAUI }){
         }))
     }
 
+    const validateInput = () => {
+        const newErrors = {};
+
+        if (!formData.title.trim()) {
+            newErrors.title = "Title is required."
+        }
+        if (!formData.service) {
+            newErrors.service = "Service is required."
+        }
+        if (!formData.date) {
+            newErrors.date = "Date is required."
+        } else {
+            try {
+                const selectedDate = getNewDate(formData.date);
+                const today = getTime();
+                today.setHours(0, 0, 0, 0);
+                if (selectedDate < today) {
+                    newErrors.date = "Date cannot be in the past.";
+                }
+            } catch (error) {
+                console.error("Error in trying to parse date data")
+            }
+        }
+        if (!formData.time) {
+            newErrors.time = "Time is required.";
+        }
+        if (!formData.staffMember.trim()) {
+            newErrors.staffMember = "Staff Member is required.";
+        } 
+        // change if neccessary for different requirements or implement option to select from an option of staff members
+        else if (formData.staffMember.trim().length < 2) {
+            newErrors.staffMember = "Staff Memeber name must be at least 2 characters.";
+        } 
+        setError(newErrors);
+        return Object.keys(newErrors).length === 0;
+
+    }
+
     const createAppointment = async (event) => {
         event.preventDefault();
+
+        if(!validateInput()) {
+            console.error("Client-side validation failed. Please check inputs.")
+            return;
+        }
+
         try {
             const response = await fetch(fullUrl, {
                 method : 'POST',
@@ -53,6 +108,7 @@ export default function AddUI({ onCloseAUI }){
                 <div className={styles.titleDiv}>
                     <label htmlFor="title">Title: </label>
                     <input type="text"className={styles.clientInput} id="title" name="title" value={formData.title} onChange={handleValueChange} />
+                    {error.title && <p className={styles.fieldErrorMessage}>{error.title}</p>}
                 </div>
 
                 <div className={styles.serviceDiv}>
@@ -62,28 +118,33 @@ export default function AddUI({ onCloseAUI }){
                         <option value="Consultation" >Consultation</option>
                         <option value="Massage" >Massage</option>
                     </select>
+                    {error.service && <p className={styles.fieldErrorMessage}>{error.service}</p>}
                 </div>
 
                 <div className={styles.timeElementsDiv}>
                     <div className={styles.dateDiv}>
                         <label htmlFor="date">Date: </label>
                         <input type="date" className={styles.dateInput} id="date" name="date" value={formData.date} onChange={handleValueChange} />
+                        {error.date && <p className={styles.fieldErrorMessage}>{error.date}</p>}
                     </div>
                     <div className={styles.timeDiv}>
                         <label htmlFor="time">Time: </label>
                         <input type="time" className={styles.timeInput} id="time" name="time" value={formData.time} onChange={handleValueChange} />
+                        {error.time && <p className={styles.fieldErrorMessage}>{error.time}</p>}
                     </div>
                 </div>
 
                 <div className={styles.staffMemberDiv}>
                     <label htmlFor="staffMember">Staff Member: </label>
                     <input type="text" className={styles.StaffMemberInput} id="staffMember" name="staffMember" value={formData.staffMember} onChange={handleValueChange} />
+                    {error.staffMember && <p className={styles.fieldErrorMessage}>{error.staffMember}</p>}
                 </div>
 
                 <div className={styles.confirmDiv}>
                     <button className={styles.cancelButton} type="button" onClick={onCloseAUI}> Cancel </button>
                     <button className={styles.createButton} type="submit" onClick={createAppointment}> Create </button>
                 </div>
+
         </div>
     )
 }

@@ -1,8 +1,9 @@
 import express from 'express'
-// import all app routes below
-import { bookRoute } from "./app/api/routes/Book.js"
 import "dotenv/config"
 import cors from "cors"
+import { connectToDatabase, closeDatabaseConnection, db } from './app/db/connection.js'
+// import all app routes below
+import { bookRoute } from "./app/api/routes/Book.js"
 
 const app = express()
 
@@ -18,8 +19,23 @@ app.use(cors({
 
 app.use("/api", bookRoute)
 
-app.listen(PORT, (error) => {
-    if (!error) { 
-        console.log("Server has successfully started and App is listening on port " + PORT);
-    } else console.error("Error has occurred, server failed to start", error);
-} )
+async function startApplication() {
+    try {
+        await connectToDatabase();
+        
+        app.listen(PORT, () => {
+            console.log(`Server has successfully started and App is listening on port ${PORT}`);
+        })
+    } catch (error) {
+        console.log("Application failed to start due to unhandled error: ", error);
+        process.exit(1);
+    }
+}
+
+startApplication()
+
+process.on("SIGINT", async () => {
+    console.log("SIGINT signal received: Initiating gracful shutdown...");
+    await closeDatabaseConnection();
+    process.exit(0);
+});
