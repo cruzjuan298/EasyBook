@@ -10,7 +10,7 @@ install:
 
 run-backend:
 	@echo "Starting the backend server"
-	cd backend && node server.js
+	cd backend && nodemon server.js
 
 build-frontend:
 	@echo "Building the frontend"

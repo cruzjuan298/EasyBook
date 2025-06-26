@@ -2,9 +2,10 @@ import express from 'express'
 import "dotenv/config"
 import cors from "cors"
 import { connectToDatabase, closeDatabaseConnection, db } from './app/db/connection.js'
+import { addCollection } from "./app/db/createCollection.js"
 // import all app routes below
 import { bookRoute } from "./app/api/routes/Book.js"
-
+import { retrieveRoutes } from './app/api/routes/Retrieve.js'
 const app = express()
 
 app.use(express.json())
@@ -13,16 +14,20 @@ const PORT = process.env.PORT;
 
 app.use(cors({
     origin: process.env.FRONTEND_BASE_URL,
-    methods: ['GET', 'POST', 'DELETE'],
+    methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.use("/api", bookRoute)
+app.use("/api", bookRoute);
+app.use("/api", retrieveRoutes);
 
 async function startApplication() {
     try {
         await connectToDatabase();
-        
+        await addCollection("appointment");
+        await addCollection("staffMembers");
+        await addCollection("services");
+
         app.listen(PORT, () => {
             console.log(`Server has successfully started and App is listening on port ${PORT}`);
         })
@@ -34,8 +39,10 @@ async function startApplication() {
 
 startApplication()
 
-process.on("SIGINT", async () => {
-    console.log("SIGINT signal received: Initiating gracful shutdown...");
+const gracefulShutdown = async (signal) => {
+    console.log(`${signal} signal receieved: Initiating graceful shutdown...`)
     await closeDatabaseConnection();
     process.exit(0);
-});
+}
+
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
