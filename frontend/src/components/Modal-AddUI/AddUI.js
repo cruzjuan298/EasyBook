@@ -3,10 +3,10 @@ import { API_CONFIG } from "@/config/api";
 import { useState } from "react";
 import { getNewDate, getTime } from "@/utils/Time/DateUItil";
 
-export default function AddUI({ onCloseAUI }){
+export default function AddUI({ onCloseAUI, onAddAppointment }){
     const [error, setError] = useState({});
     const [formData, setFormData] = useState({
-        title: "",
+        clientName: "",
         service: "Haircut",
         date: "",
         time: "",
@@ -38,8 +38,8 @@ export default function AddUI({ onCloseAUI }){
     const validateInput = () => {
         const newErrors = {};
 
-        if (!formData.title.trim()) {
-            newErrors.title = "Title is required."
+        if (!formData.clientName.trim()) {
+            newErrors.clientName = "Title is required."
         }
         if (!formData.service) {
             newErrors.service = "Service is required."
@@ -92,8 +92,8 @@ export default function AddUI({ onCloseAUI }){
                 throw new Error(`HTTP error. Status: ${response.status}`)
             }
 
-            const data = await response.json()
-            console.log(data);
+            const data = await response.json();
+            onAddAppointment(formData);
             onCloseAUI();
 
         } catch (error) {
@@ -105,10 +105,10 @@ export default function AddUI({ onCloseAUI }){
         <div className={styles.addDiv}>
             <h1 className={styles.newTitle}>Create New Appointment</h1>
                        
-                <div className={styles.titleDiv}>
-                    <label htmlFor="title">Title: </label>
-                    <input type="text"className={styles.clientInput} id="title" name="title" value={formData.title} onChange={handleValueChange} />
-                    {error.title && <p className={styles.fieldErrorMessage}>{error.title}</p>}
+                    <div className={styles.clientNameDiv}>
+                    <label htmlFor="clientName">Client Name: </label>
+                    <input type="text"className={styles.clientInput} id="clientName" name="clientName" value={formData.clientName} onChange={handleValueChange} />
+                    {error.clientName && <p className={styles.fieldErrorMessage}>{error.title}</p>}
                 </div>
 
                 <div className={styles.serviceDiv}>

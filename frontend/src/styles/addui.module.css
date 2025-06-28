@@ -14,7 +14,7 @@
     text-align: center;
 }
 
-.titleDiv,
+.clientNameDiv,
 .serviceDiv,
 .staffMemberDiv {
     display: flex;

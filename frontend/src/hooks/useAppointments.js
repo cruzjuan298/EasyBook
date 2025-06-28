@@ -37,5 +37,5 @@ export default function useAppointment() {
         fetchAppointments();
     }, [fetchAppointments]);
 
-    return { appointments, loading, error };
+    return { appointments, loading, error, fetchAppointments };
 }

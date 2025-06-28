@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import styles from "./page.module.css"
 import BoardView from "../../components/BoardView/BoardView.js"
 import CalenderView from "../../components/CalenderView/CalenderView.js"
@@ -12,24 +12,38 @@ import { getTime } from "@/utils/Time/DateUItil"
 import useAppointment from "@/hooks/useAppointments.js"
 
 export default function DashboardPage(){
-    const { loading, error, appointments } = useAppointment();
+    const { loading, error, appointments, fetchAppointments} = useAppointment();
     var currentDate = getTime();
     var currentMonth = currentDate.getMonth();
     var currentYear = currentDate.getFullYear(); 
 
     const [view, setView] = useState("calender");
+    const [showAddAppointment, setShowAddAppointment] = useState(false);
+    const [optimisticAppointments, setOptmisticAppointments] = useState(appointments) 
+    
+    useEffect(() => {
+        setOptmisticAppointments(appointments)
+    }, [appointments]);    
 
-    const [showAddAppointment, setShowAddAppointment] = useState(false)
+    const addOptimistically = useCallback((newAppointment) => {
+            if (!newAppointment) {              
+                return;
+            }        
+        setOptmisticAppointments(prev => [...prev, newAppointment]);
+    }, []);
 
     const handleOpen= () => {
         setShowAddAppointment(true)
     }
 
     const handleClose= () => {
-        setShowAddAppointment(false)
+        setShowAddAppointment(false);
     }
 
-    console.log(appointments)
+    const handleAddAppointment = (formData) => {
+        addOptimistically(formData);
+    }
+
     const renderView = (view) => {
         switch (view) {
             case "calender":
@@ -37,7 +51,7 @@ export default function DashboardPage(){
             case "list":
                 return <ListView time={currentDate} />
             case "board":
-                return <BoardView onAddBookingClick={handleOpen} boardAppointments={appointments}/>
+                return <BoardView onAddBookingClick={handleOpen} boardAppointments={optimisticAppointments}/>
             default:
                 return <CalenderView onAddBookingClick={handleOpen}/>
         }
@@ -72,7 +86,7 @@ export default function DashboardPage(){
                 </div>
                 <div className={styles.viewDiv}>
                         {renderView(view)}
-                        {<Modal isOpen={showAddAppointment} children={<AddUI onCloseAUI={handleClose} />} />} 
+                        {<Modal isOpen={showAddAppointment} children={<AddUI onCloseAUI={handleClose} onAddAppointment={handleAddAppointment} />} />} 
                 </div>
         </div>
     )
