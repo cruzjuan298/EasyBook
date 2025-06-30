@@ -17,6 +17,18 @@ router.get("/appointments", async function getAppointments(req, res, next){
     }
 })
 
+router.get("/appointment", async function getAppointment(req, res, next) {
+    try {
+        const appointmentId = req.body;
+        // the id has to equal the id of the stored apppointment. change schema such that the key == id
+    } catch (error) {
+        res.status(400).json({
+            message : "No appointment avilable",
+            errorMessage : error
+        })
+    }
+})
+
 router.get("/staffMembers", async function getStaffMembers(req, res, next) {
     try {
         const staffMembersData = await db.collection("staffMembers")

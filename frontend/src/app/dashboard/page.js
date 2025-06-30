@@ -58,7 +58,7 @@ export default function DashboardPage(){
     };
 
     if (loading) {
-        return <p>Loadin appointments...</p>
+        return <p>Loading appointments...</p>
     }
 
     if (error) {

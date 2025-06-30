@@ -93,6 +93,8 @@ export default function AddUI({ onCloseAUI, onAddAppointment }){
             }
 
             const data = await response.json();
+            
+            formData._id = data.resultID;
             onAddAppointment(formData);
             onCloseAUI();
 
