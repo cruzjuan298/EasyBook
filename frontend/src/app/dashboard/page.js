@@ -49,7 +49,7 @@ export default function DashboardPage(){
             case "calender":
                 return <CalenderView onAddBookingClick={handleOpen} date={currentDate} month={currentMonth} year={currentYear} />
             case "list":
-                return <ListView time={currentDate} />
+                return <ListView appointments={optimisticAppointments} />
             case "board":
                 return <BoardView onAddBookingClick={handleOpen} boardAppointments={optimisticAppointments}/>
             default:

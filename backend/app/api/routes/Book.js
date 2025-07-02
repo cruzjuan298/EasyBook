@@ -13,6 +13,7 @@ router.post("/book", async function bookAppointment(req, res, next) {
         res.status(201).json({
             message: `Successfully added appointment`,
             resultID: result.insertedId,
+            success : true
         })
         
     } catch (error) {
