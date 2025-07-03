@@ -33,9 +33,16 @@ export default function useAppointment() {
         }
     }, [appointmentUrl])
 
+    const updateAppointments = useCallback( async (newAppointment) => {
+        if (!newAppointment) {
+            return
+        }
+        setAppointments(prev => [...prev, newAppointment])
+    }, [])
+
     useEffect(() => {
         fetchAppointments();
     }, [fetchAppointments]);
 
-    return { appointments, loading, error, fetchAppointments };
+    return { appointments, loading, error, fetchAppointments, updateAppointments };
 }

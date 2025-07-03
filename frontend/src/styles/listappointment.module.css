@@ -26,6 +26,12 @@
 
 .statusEdit {
     margin-right: 1rem;
+    display: flex;
+    opacity: 0;
+}
+
+.appointmentDiv:hover .statusEdit{
+    opacity: 1;
 }
 
 

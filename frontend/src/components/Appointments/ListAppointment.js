@@ -1,5 +1,6 @@
 import styles from "@/styles/listappointment.module.css"
-import EditButton from "../Edit/editbutton"
+import EditButton from "../Edit/editButton"
+import DeleteButton from "../Edit/deleteButton"
 
 export default function ListAppointment({ time, client, service, staffMember }) {
     return(
@@ -10,6 +11,7 @@ export default function ListAppointment({ time, client, service, staffMember }) 
                 <p className={styles.subsectionText}>{service} with {staffMember}</p>
             </div>
             <div className={styles.statusEdit}>
+                <DeleteButton />
                 <EditButton />
             </div>
         </div>

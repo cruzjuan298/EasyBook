@@ -23,3 +23,12 @@
     font-size: 0.875rem;
     color: rgb(107, 114, 128);
 }
+
+.container2 {
+    display: flex;
+    opacity: 0;
+}
+
+.bAppointmentDiv:hover .container2 {
+    opacity: 1;
+}

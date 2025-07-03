@@ -1,5 +1,6 @@
 import styles from "../../styles/boardAppointment.module.css"
-import EditButton from "../Edit/editbutton"
+import EditButton from "../Edit/editButton"
+import DeleteButton from "../Edit/deleteButton"
 
 export default function BoardAppointment({clientName, date, service, time}){
     return(
@@ -10,6 +11,7 @@ export default function BoardAppointment({clientName, date, service, time}){
             </div>
 
             <div className={styles.container2}>
+                <DeleteButton />
                 <EditButton />                
             </div>
         </div>

@@ -12,25 +12,13 @@ import { getTime } from "@/utils/Time/DateUItil"
 import useAppointment from "@/hooks/useAppointments.js"
 
 export default function DashboardPage(){
-    const { loading, error, appointments, fetchAppointments} = useAppointment();
+    const { loading, error, appointments, fetchAppointments, updateAppointments } = useAppointment();
     var currentDate = getTime();
     var currentMonth = currentDate.getMonth();
     var currentYear = currentDate.getFullYear(); 
 
     const [view, setView] = useState("calender");
     const [showAddAppointment, setShowAddAppointment] = useState(false);
-    const [optimisticAppointments, setOptmisticAppointments] = useState(appointments) 
-    
-    useEffect(() => {
-        setOptmisticAppointments(appointments)
-    }, [appointments]);    
-
-    const addOptimistically = useCallback((newAppointment) => {
-            if (!newAppointment) {              
-                return;
-            }        
-        setOptmisticAppointments(prev => [...prev, newAppointment]);
-    }, []);
 
     const handleOpen= () => {
         setShowAddAppointment(true)
@@ -41,7 +29,7 @@ export default function DashboardPage(){
     }
 
     const handleAddAppointment = (formData) => {
-        addOptimistically(formData);
+        updateAppointments(formData);
     }
 
     const renderView = (view) => {
@@ -49,9 +37,9 @@ export default function DashboardPage(){
             case "calender":
                 return <CalenderView onAddBookingClick={handleOpen} date={currentDate} month={currentMonth} year={currentYear} />
             case "list":
-                return <ListView appointments={optimisticAppointments} />
+                return <ListView appointments={appointments} />
             case "board":
-                return <BoardView onAddBookingClick={handleOpen} boardAppointments={optimisticAppointments}/>
+                return <BoardView onAddBookingClick={handleOpen} boardAppointments={appointments}/>
             default:
                 return <CalenderView onAddBookingClick={handleOpen}/>
         }
