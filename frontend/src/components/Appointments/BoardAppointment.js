@@ -1,8 +1,9 @@
 import styles from "../../styles/boardAppointment.module.css"
 import EditButton from "../Edit/editButton"
 import DeleteButton from "../Edit/deleteButton"
+import DeleteConfirmation from "@/components/Modals/Modal-DeleteUI/DeleteUI"
 
-export default function BoardAppointment({clientName, date, service, time}){
+export default function BoardAppointment({ onDeleteClick, clientName, date, service, time, appointmentId}){
     return(
         <div className={styles.bAppointmentDiv}>
             <div className={styles.container1}>
@@ -11,7 +12,7 @@ export default function BoardAppointment({clientName, date, service, time}){
             </div>
 
             <div className={styles.container2}>
-                <DeleteButton />
+                <DeleteButton onDeleteClick={onDeleteClick} appointmentId={appointmentId} />
                 <EditButton />                
             </div>
         </div>

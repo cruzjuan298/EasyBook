@@ -1,0 +1,69 @@
+.confirmationDiv {
+    background-color: #ffffff; 
+    padding: 2.5rem; 
+    border-radius: 1rem;
+    text-align: center;
+    box-sizing: border-box; 
+    font-family: 'Inter', sans-serif; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1f2937; 
+    margin-bottom: 0.5rem; 
+}
+
+.messageHighlight {
+    font-size: 1rem;
+    color: #4b5563; 
+    line-height: 1.5;
+    margin-bottom: 1rem; 
+}
+
+.buttonsDiv {
+    display: flex;
+    gap: 1rem; 
+    margin-top: 1.5rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.cancelButton,
+.deleteButton {
+    padding: 0.75rem 1.5rem; 
+    border-radius: 9999px; 
+    font-weight: 600; 
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent; 
+    font-size: 1rem; 
+}
+
+.cancelButton {
+    background-color: #e5e7eb; 
+    color: #374151;
+    border-color: #d1d5db; 
+}
+
+.cancelButton:hover {
+    background-color: #d1d5db;
+    transform: translateY(-1px); 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.deleteButton {
+    background-color: #ef4444; 
+    color: #ffffff; 
+    border-color: #dc2626; 
+}
+
+.deleteButton:hover {
+    background-color: #dc2626; 
+    transform: translateY(-1px); 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

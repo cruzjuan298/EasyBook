@@ -6,8 +6,7 @@ import styles from "./page.module.css"
 import BoardView from "../../components/BoardView/BoardView.js"
 import CalenderView from "../../components/CalenderView/CalenderView.js"
 import ListView from "../../components/ListView/ListView.js"
-import Modal from "@/components/Modal-AddUI/Modal"
-import AddUI from "@/components/Modal-AddUI/AddUI"
+import Modal from "@/components/Modals/Modal"
 import { getTime } from "@/utils/Time/DateUItil"
 import useAppointment from "@/hooks/useAppointments.js"
 
@@ -18,30 +17,39 @@ export default function DashboardPage(){
     var currentYear = currentDate.getFullYear(); 
 
     const [view, setView] = useState("calender");
-    const [showAddAppointment, setShowAddAppointment] = useState(false);
+    const [showModal, setshowModal] = useState(false);
+    const [modalContentType, setModalContentType] = useState(null) // change to edit, delete or whatever
 
-    const handleOpen= () => {
-        setShowAddAppointment(true)
-    }
 
-    const handleClose= () => {
-        setShowAddAppointment(false);
+
+    const handleClose = () => {
+        setshowModal(false);
+        setModalContentType(null);
     }
 
     const handleAddAppointment = (formData) => {
         updateAppointments(formData);
     }
 
+    const handleAddEdit = () => {
+        setshowModal(true);
+        setModalContentType("add");
+    }
+
+    const handleDeleteEdit = () => {
+        setshowModal(true);
+        setModalContentType("delete");
+    }
     const renderView = (view) => {
         switch (view) {
             case "calender":
-                return <CalenderView onAddBookingClick={handleOpen} date={currentDate} month={currentMonth} year={currentYear} />
+                return <CalenderView onAddBookingClick={handleAddEdit} date={currentDate} month={currentMonth} year={currentYear} />
             case "list":
-                return <ListView appointments={appointments} />
+                return <ListView onDeleteClick={handleDeleteEdit} appointments={appointments} />
             case "board":
-                return <BoardView onAddBookingClick={handleOpen} boardAppointments={appointments}/>
+                return <BoardView onDeleteClick={handleDeleteEdit} onAddBookingClick={handleAddEdit} boardAppointments={appointments}/>
             default:
-                return <CalenderView onAddBookingClick={handleOpen}/>
+                return <CalenderView onAddBookingClick={handleAddEdit} date={currentDate} month={currentMonth} year={currentYear} />
         }
     };
 
@@ -74,7 +82,7 @@ export default function DashboardPage(){
                 </div>
                 <div className={styles.viewDiv}>
                         {renderView(view)}
-                        {<Modal isOpen={showAddAppointment} children={<AddUI onCloseAUI={handleClose} onAddAppointment={handleAddAppointment} />} />} 
+                        {<Modal isOpen={showModal} onClose={handleClose} onAdd={handleAddAppointment} modal={modalContentType} />} 
                 </div>
         </div>
     )

@@ -3,3 +3,8 @@
     border-width: 0;
     cursor: pointer;
 }
+
+.editButton:hover {
+    background-color: transparent;
+    transform: translateY(-1px);
+}

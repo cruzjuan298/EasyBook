@@ -2,7 +2,7 @@ import styles from "@/styles/listappointment.module.css"
 import EditButton from "../Edit/editButton"
 import DeleteButton from "../Edit/deleteButton"
 
-export default function ListAppointment({ time, client, service, staffMember }) {
+export default function ListAppointment({ time, client, service, staffMember, onDeleteClick, appointmentId }) {
     return(
         <div className={styles.appointmentDiv}>
             <div className={styles.border}></div>
@@ -11,8 +11,8 @@ export default function ListAppointment({ time, client, service, staffMember }) 
                 <p className={styles.subsectionText}>{service} with {staffMember}</p>
             </div>
             <div className={styles.statusEdit}>
-                <DeleteButton />
-                <EditButton />
+                <DeleteButton onDeleteClick={onDeleteClick} appointmentId={appointmentId}/>
+                <EditButton  />
             </div>
         </div>
     )

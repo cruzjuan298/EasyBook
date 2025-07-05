@@ -1,4 +1,4 @@
-import styles from "../../styles/addui.module.css"
+import styles from "@/styles/addui.module.css"
 import { API_CONFIG } from "@/config/api";
 import { useState } from "react";
 import { getNewDate, getTime } from "@/utils/Time/DateUItil";
