@@ -6,6 +6,8 @@ import { addCollection } from "./app/db/createCollection.js"
 // import all app routes below
 import { bookRoute } from "./app/api/routes/Book.js"
 import { retrieveRoutes } from './app/api/routes/Retrieve.js'
+import { deleteRoutes } from './app/api/routes/Delete.js'
+
 const app = express()
 
 app.use(express.json())
@@ -20,6 +22,7 @@ app.use(cors({
 
 app.use("/api", bookRoute);
 app.use("/api", retrieveRoutes);
+app.use("/api", deleteRoutes);
 
 async function startApplication() {
     try {

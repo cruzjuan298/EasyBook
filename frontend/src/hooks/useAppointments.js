@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { API_CONFIG } from "@/config/api";
 
-export default function useAppointment() {
+export default function useAppointments() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null)
     const [appointments, setAppointments] = useState([])

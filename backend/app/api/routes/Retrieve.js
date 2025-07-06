@@ -21,7 +21,7 @@ router.get("/appointments", async function getAppointments(req, res, next){
     }
 })
 
-router.get("/appointment/:id", async function getAppointment(req, res, next) {
+router.get("/appointments/:id", async function getAppointment(req, res, next) {
     try {
         const appointmentId = req.params.id;
 

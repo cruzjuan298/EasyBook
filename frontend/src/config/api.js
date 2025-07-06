@@ -8,7 +8,8 @@ export const API_CONFIG = {
     endpoints: {
         book: "/api/book",
         retrieveAppointments: "/api/appointments",
-        retrieveStaffMembers: "/api/staffMembers"
+        retrieveStaffMembers: "/api/staffMembers",
+        appointmentById: "/api/appointments/:id",
     },
     apiVersion: "v0.1",
 };

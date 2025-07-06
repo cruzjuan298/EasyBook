@@ -8,10 +8,10 @@ import CalenderView from "../../components/CalenderView/CalenderView.js"
 import ListView from "../../components/ListView/ListView.js"
 import Modal from "@/components/Modals/Modal"
 import { getTime } from "@/utils/Time/DateUItil"
-import useAppointment from "@/hooks/useAppointments.js"
+import useAppointments from "@/hooks/useAppointments.js"
 
 export default function DashboardPage(){
-    const { loading, error, appointments, fetchAppointments, updateAppointments } = useAppointment();
+    const { loading, error, appointments, fetchAppointments, updateAppointments } = useAppointments();
     var currentDate = getTime();
     var currentMonth = currentDate.getMonth();
     var currentYear = currentDate.getFullYear(); 
