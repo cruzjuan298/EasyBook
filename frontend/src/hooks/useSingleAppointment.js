@@ -45,7 +45,6 @@ export default function useSingleAppointment() {
                 const errorText = await response.text();
                 throw new Error(`Failed to fetch appointment: ${response.status} - ${errorText}`);
             }
-
             return true;
 
         } catch (error) {
@@ -54,6 +53,6 @@ export default function useSingleAppointment() {
     }, [appointmentBaseUrl] )
 
 
-    return { error, fetchAppointment, deleteAppointment, }
+    return { error, fetchAppointment, deleteAppointment }
 
 }

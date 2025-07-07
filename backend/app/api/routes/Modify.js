@@ -4,7 +4,7 @@ import express from "express"
 
 router = express.Router()
 
-router.post("/modify/:appointmentId", async function modifyAppointment(req, res, next) {
+router.post("/appointments/:id", async function modifyAppointment(req, res, next) {
     try {
         const appointmentIdData = req.parms.id;
         

@@ -4,6 +4,9 @@ import DeleteButton from "../Edit/deleteButton"
 import DeleteConfirmation from "@/components/Modals/Modal-DeleteUI/DeleteUI"
 
 export default function BoardAppointment({ onDeleteClick, clientName, date, service, time, appointmentId}){
+    const handleDelete = () => {
+        onDeleteClick(appointmentId);
+    } 
     return(
         <div className={styles.bAppointmentDiv}>
             <div className={styles.container1}>
@@ -12,7 +15,7 @@ export default function BoardAppointment({ onDeleteClick, clientName, date, serv
             </div>
 
             <div className={styles.container2}>
-                <DeleteButton onDeleteClick={onDeleteClick} appointmentId={appointmentId} />
+                <DeleteButton onDelete={handleDelete} />
                 <EditButton />                
             </div>
         </div>

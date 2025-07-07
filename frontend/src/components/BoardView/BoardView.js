@@ -1,7 +1,7 @@
 import styles from "../../styles/boardview.module.css"
 import Board from "./Board" 
 
-export default function BoardView( { onDeleteClick,onAddBookingClick, boardAppointments }) {
+export default function BoardView( { onDeleteClick, onAddBookingClick, boardAppointments }) {
     
     return (
         <div className={styles.boardViewDiv}>

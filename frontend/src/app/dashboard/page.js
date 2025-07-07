@@ -9,22 +9,24 @@ import ListView from "../../components/ListView/ListView.js"
 import Modal from "@/components/Modals/Modal"
 import { getTime } from "@/utils/Time/DateUItil"
 import useAppointments from "@/hooks/useAppointments.js"
+import useSingleAppointment from "@/hooks/useSingleAppointment.js"
 
 export default function DashboardPage(){
-    const { loading, error, appointments, fetchAppointments, updateAppointments } = useAppointments();
+    const { loading, appointmentsError, appointments, fetchAppointments, updateAppointments } = useAppointments();
+    const { singleAppointmentError, fetchAppointment, deleteAppointment } = useSingleAppointment();
     var currentDate = getTime();
     var currentMonth = currentDate.getMonth();
     var currentYear = currentDate.getFullYear(); 
 
     const [view, setView] = useState("calender");
     const [showModal, setshowModal] = useState(false);
-    const [modalContentType, setModalContentType] = useState(null) // change to edit, delete or whatever
-
-
+    const [modalContentType, setModalContentType] = useState(null); // change to edit, delete or whatever
+    const [appointmentFocus, setAppointmentFocus] = useState(null);
 
     const handleClose = () => {
         setshowModal(false);
         setModalContentType(null);
+        setAppointmentFocus(null);
     }
 
     const handleAddAppointment = (formData) => {
@@ -36,10 +38,13 @@ export default function DashboardPage(){
         setModalContentType("add");
     }
 
-    const handleDeleteEdit = () => {
+    const handleDeleteEdit = (appointmentId) => {
         setshowModal(true);
         setModalContentType("delete");
+        setAppointmentFocus(appointmentId)
     }
+
+
     const renderView = (view) => {
         switch (view) {
             case "calender":
@@ -47,9 +52,9 @@ export default function DashboardPage(){
             case "list":
                 return <ListView onDeleteClick={handleDeleteEdit} appointments={appointments} />
             case "board":
-                return <BoardView onDeleteClick={handleDeleteEdit} onAddBookingClick={handleAddEdit} boardAppointments={appointments}/>
+                return <BoardView onDeleteClick={handleDeleteEdit} onAddBookingClick={handleAddEdit} boardAppointments={appointments} />
             default:
-                return <CalenderView onAddBookingClick={handleAddEdit} date={currentDate} month={currentMonth} year={currentYear} />
+                return <CalenderView onAddBookingClick={handleAddEdit} date={currentDate} month={currentMonth} year={currentYear}  />
         }
     };
 
@@ -57,8 +62,8 @@ export default function DashboardPage(){
         return <p>Loading appointments...</p>
     }
 
-    if (error) {
-        return <p>Error: {error}</p>
+    if (appointmentsError) {
+        return <p>Error: {appointmentsError}</p>
     }
     return(
         <div className={styles.dashboardDiv}>
@@ -82,7 +87,7 @@ export default function DashboardPage(){
                 </div>
                 <div className={styles.viewDiv}>
                         {renderView(view)}
-                        {<Modal isOpen={showModal} onClose={handleClose} onAdd={handleAddAppointment} modal={modalContentType} />} 
+                        {<Modal isOpen={showModal} onClose={handleClose} onAdd={handleAddAppointment} modal={modalContentType} onDelete={deleteAppointment} appointmentFocus={appointmentFocus} />} 
                 </div>
         </div>
     )
