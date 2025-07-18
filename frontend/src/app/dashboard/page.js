@@ -12,7 +12,7 @@ import useAppointments from "@/hooks/useAppointments.js"
 import useSingleAppointment from "@/hooks/useSingleAppointment.js"
 
 export default function DashboardPage(){
-    const { loading, appointmentsError, appointments, fetchAppointments, updateAppointments } = useAppointments();
+    const { loading, appointmentsError, appointments, fetchAppointments, updateAppointments, deleteAppointmentOptims } = useAppointments();
     const { singleAppointmentError, fetchAppointment, deleteAppointment } = useSingleAppointment();
     var currentDate = getTime();
     var currentMonth = currentDate.getMonth();
@@ -44,6 +44,21 @@ export default function DashboardPage(){
         setAppointmentFocus(appointmentId)
     }
 
+    const handleDeleteAppointment = async (appointmentId) => {
+        try {
+            const success = await deleteAppointment(appointmentId);
+            if (success) {
+                deleteAppointmentOptims(appointmentId);
+                return true;
+            } else {
+                console.warn("Error in hanlding deletetion of an appointment");
+                return false;
+            } 
+        } catch (error) {
+            console.error("Error in handling delete operaton: ", error)
+            return false;
+        }
+    }
 
     const renderView = (view) => {
         switch (view) {
@@ -89,7 +104,7 @@ export default function DashboardPage(){
                 </div>
                 <div className={styles.viewDiv}>
                         {renderView(view)}
-                        {<Modal isOpen={showModal} onClose={handleClose} onAdd={handleAddAppointment} modal={modalContentType} onDelete={deleteAppointment} appointmentFocus={appointmentFocus} />} 
+                        {<Modal isOpen={showModal} onClose={handleClose} onAdd={handleAddAppointment} modal={modalContentType} onDelete={handleDeleteAppointment} appointmentFocus={appointmentFocus} />} 
                 </div>
         </div>
     )

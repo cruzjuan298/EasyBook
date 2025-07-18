@@ -14,3 +14,29 @@
 .newBookingBoard{
     background-color: rgb(239, 246, 255);
 }
+
+.newAppointments, .confirmedAppointments, .completedAppointments {
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); 
+    padding: 1.5rem;
+    width: 20rem;
+    margin-left: 1.5rem;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+}
+
+.newAppointments {
+    background-color: rgb(239 246 255);
+    color: rgb(30 64 175);
+}
+
+
+.confirmedAppointments {
+    background-color: rgb(240 253 244);
+    color: rgb(22 101 52);
+}
+
+.completedAppointments {
+    background-color: rgb(249 250 251);
+    color: rgb(31 41 55);
+}

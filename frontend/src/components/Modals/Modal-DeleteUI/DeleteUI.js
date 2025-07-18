@@ -2,9 +2,19 @@ import styles from "@/styles/deleteUI.module.css"
 
 export default function DeleteConfirmation({ onCloseUI, onDelete, appointmentId }) {
     
-    const handleOnDelete = () => {
-        onDelete(appointmentId)
-    }    
+    const handleOnDelete = async () => {
+        try {
+            const success = await onDelete(appointmentId);
+            if (success) {
+                onCloseUI();
+            } else {
+                console.warn("Deletion of appointment was not successful");
+            }
+        } catch (error) {
+            console.error("Error in handling appointment deletion: ", error.message)
+        }
+    }
+        
     return(
         <div className={styles.confirmationDiv}>
             <h1 className={styles.title} >Delete Confirmation</h1>

@@ -9,7 +9,7 @@ router.delete("/appointments/:id", async function deleteAppointment(req, res, ne
     const appointmentIdData = req.params.id
 
     if (!ObjectId.isValid(appointmentIdData)) {
-        console.warm("Attempting to modify appointment with invalid object id format");
+        console.warn("Attempting to modify appointment with invalid object id format");
         return res.status(400).json({                
             message : "Invalid appointment ID format",
             success : false

@@ -33,16 +33,27 @@ export default function useAppointments() {
         }
     }, [appointmentUrl])
 
-    const updateAppointments = useCallback( async (newAppointment) => {
+    const updateAppointments = useCallback((newAppointment) => {
         if (!newAppointment) {
             return
         }
         setAppointments(prev => [...prev, newAppointment])
     }, [])
 
+    const deleteAppointmentOptims = useCallback((appointmentId) => {
+        if (!appointmentId) {
+            return;
+        }
+        setAppointments(prevAppointments => {
+            return prevAppointments.filter(
+                appointment => appointment._id !== appointmentId
+            )
+        })
+    }, [])
+
     useEffect(() => {
         fetchAppointments();
     }, [fetchAppointments]);
 
-    return { appointments, loading, error, fetchAppointments, updateAppointments };
+    return { appointments, loading, error, fetchAppointments, updateAppointments, deleteAppointmentOptims };
 }

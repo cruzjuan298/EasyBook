@@ -7,9 +7,9 @@ export default function BoardView( { onDeleteClick, onAddBookingClick, boardAppo
         <div className={styles.boardViewDiv}>
             <h1 className={styles.title}>Appointment Pipeline</h1>
             <div className={styles.boards}>
-                <Board title={"New Bookings"} onDeleteClick={onDeleteClick} addBookingUI={onAddBookingClick} loadedAppointments={boardAppointments} />
-                <Board title={"Confirmed"} onDeleteClick={onDeleteClick} addBookingUI={onAddBookingClick}/>
-                <Board title={"Completed"} onDeleteClick={onDeleteClick} addBookingUI={onAddBookingClick} />
+                <Board title={"New Bookings"} onDeleteClick={onDeleteClick} addBookingUI={onAddBookingClick} loadedAppointments={boardAppointments} className={styles.newAppointments} buttonColor="blueButton" />
+                <Board title={"Confirmed"} onDeleteClick={onDeleteClick} addBookingUI={onAddBookingClick} className={styles.confirmedAppointments} buttonColor="greenButton"/>
+                <Board title={"Completed"} onDeleteClick={onDeleteClick} addBookingUI={onAddBookingClick} className={styles.completedAppointments} buttonColor="greyButton"/>
             </div>
         </div>
     )
