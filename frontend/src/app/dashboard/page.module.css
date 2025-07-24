@@ -1,32 +1,12 @@
 .dashboardDiv {
     min-height: 100vh;
 }
-.dashboardHeader{
-    display: flex;
-    justify-content: space-between;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    align-items: center;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.titleDiv{
-    padding-left: 1.5rem;
-}
-
-.iconDiv {
-    padding-right: 1.5rem;
-    display: flex;
-}
 
 .title {
     font-size: 1.7rem;
     font-weight: 700;
     margin: 0;
+    color: rgb(37 99 235); 
 }
 
 .button{
@@ -39,7 +19,6 @@
     margin-left: 1rem;
     margin-right: 1rem;
 }
-
 
 .dashboardToggle {
     display: flex; 

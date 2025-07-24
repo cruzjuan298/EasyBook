@@ -1,0 +1,54 @@
+.homeDiv {
+    min-height: 100vh;
+    width: 100%;
+}
+
+.title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin: 0;
+    color: rgb(37 99 235); 
+    text-decoration: none;
+}
+
+.button {
+    background: none;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.calIcon {
+    width: 35px;
+}
+
+.integrationsDiv{
+    padding-top: 3rem;
+    padding-bottom: 6rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    box-sizing: border-box;
+    text-align: center;
+    max-width: 85rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.integrateTitle {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    color: rgb(17 24 39);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.integrationCards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem;
+    display: grid;
+    box-sizing: border-box;
+}
