@@ -1,25 +1,8 @@
 import express from "express";
-import { db } from "../../db/connection.js";
+import { bookAppointment } from "../controllers/Book.controller.js";
 
 const router = express.Router()
 
-router.post("/book", async function bookAppointment(req, res, next) {
-    try {
-        const appointmentData = req.body;
-
-        const appointmentCollection = db.collection("appointment");
-        const result  = await appointmentCollection.insertOne(appointmentData);
-
-        res.status(201).json({
-            message: `Successfully added appointment`,
-            resultID: result.insertedId,
-            success : true
-        })
-        
-    } catch (error) {
-        console.error("Error inserting appointment: ", error);
-        next(error);
-    }
-})
+router.post("/book", bookAppointment )
 
 export const bookRoute = router

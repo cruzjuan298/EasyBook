@@ -1,4 +1,4 @@
-import { db } from "../../db/connection.js"
+import { db } from "../db/connection.js"
 
 export async function retrieveFromAllCollection(collectionName) {
     if (!db) {

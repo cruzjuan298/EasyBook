@@ -14,7 +14,7 @@
 
 .cardHeader {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
@@ -22,9 +22,13 @@
 }
 
 .cardHeader svg {
-    width: 35px;
+    width: 45px;
     height: 45px;
     fill: currentColor;
+}
+
+.iconWrapper {
+    margin-bottom: 0.45rem;
 }
 
 .cardTitle {

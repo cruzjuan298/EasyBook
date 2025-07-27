@@ -1,4 +1,5 @@
 import styles from "./page.module.css"
+import config from "@/config"
 
 export default function Home() {
   return (
@@ -6,14 +7,14 @@ export default function Home() {
       <nav className={styles.navbar} >
 
         <div className={styles.navbarTitleDiv1}>
-          <a className={styles.navbarTitle}>Bookme</a>
+          <a className={styles.navbarTitle}>EasyBook</a>
         </div>
         
         <div className={styles.navbarTitleDiv2}>
           <a href="#about" className={styles.navbarInfoTitle} > About </a>
           <a href="#features" className={styles.navbarInfoTitle} > Features </a>
           <a href="#setup" className={styles.navbarInfoTitle} > Setup </a>
-          <a href="/dashboard" className={styles.navbarInfoTitle} >Try it for free </a>
+          <a href={config.routes.DASHBOARD} className={styles.navbarInfoTitle} >Try it for free </a>
         </div>
       </nav>
 
@@ -23,7 +24,7 @@ export default function Home() {
               <h1 className={styles.heroTitle}>Streamline Your Bookings, Grow Your Business.</h1>
               <p className={styles.heroDescription}> Bookme makes it effortless for small businesses to manage appointments, send automated reminders, and delight clients.</p>
               <div className={styles.heroOptions}>
-                <a className={styles.heroGetStarted} href="/dashboard">Get Started Free</a>
+                <a className={styles.heroGetStarted} href={config.routes.DASHBOARD}>Get Started Free</a>
                 <a className={styles.heroLearnMore}>Learn More</a>
               </div>
             </div>
@@ -101,7 +102,7 @@ export default function Home() {
           <div className={styles.ctaDiv}>
             <h2 className={styles.ctaTitle}>Ready to Simplify Your Scheduling? </h2>
             <p className={styles.ctaSubSection}> Become one of the first users of bookme. Start tracking your appointments today! </p>
-            <a className={styles.ctaTrial} href="/dashboard">Start For Free </a>
+            <a className={styles.ctaTrial} href={config.routes.DASHBOARD}>Start For Free </a>
           </div>
         </section>
 
