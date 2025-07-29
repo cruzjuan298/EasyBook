@@ -1,17 +1,21 @@
 import express from 'express'
 import "dotenv/config"
 import cors from "cors"
+import cookieParser from 'cookie-parser'
+import CookiesService from './app/services/Cookies.service.js'
 import { connectToDatabase, closeDatabaseConnection, db } from './app/db/connection.js'
 import { addCollection } from "./app/db/createCollection.js"
+import { authMiddleware } from './app/middleware/Auth.middleware.js'
 // import all app routes below
-import { bookRoute} from "./app/api/routes/Book.js"
-import { retrieveRoutes } from './app/api/routes/Retrieve.js'
-import { deleteRoutes } from './app/api/routes/Delete.js'
+import { bookRoute} from "./app/api/routes/Book.route.js"
+import { retrieveRoutes } from './app/api/routes/Retrieve.route.js'
+import { deleteRoutes } from './app/api/routes/Delete.route.js'
+import { authRoutes } from './app/api/routes/Auth.route.js'
 
 const app = express()
 
 app.use(express.json())
-
+app.use(cookieParser())
 const PORT = process.env.PORT;
 
 app.use(cors({
@@ -23,6 +27,15 @@ app.use(cors({
 app.use("/api", bookRoute);
 app.use("/api", retrieveRoutes);
 app.use("/api", deleteRoutes);
+app.use("/api", authRoutes)
+
+app.get("/", async (req, res)  => {
+    const idToken = req.cookies[CookiesService.ID_TOKEN_COOKIE.name];
+    if (!idToken) return res.redirect("/home")
+    
+    return res.redirect("/dashboard") 
+})
+app.use(authMiddleware);
 
 async function startApplication() {
     try {
