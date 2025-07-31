@@ -75,7 +75,7 @@ export default function Home() {
                                 </g>
                             </g>
                             </svg>
-                            </>
+                        </>
                     }
                     />
                     <IntegrationCard 

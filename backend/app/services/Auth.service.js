@@ -1,4 +1,7 @@
 import { OAuth2Client } from "google-auth-library";
+import dotenv from "dotenv"
+
+dotenv.config({ path: "../../.env"});
 
 export default class AuthService {
     static #CLIENT_ID = process.env.GOOGLE_CLIENT_ID
@@ -21,14 +24,15 @@ export default class AuthService {
 
     /**
      * 
-     * @returns {string} the Url used to redirect the userto the google oauth2 screem
+     * @returns {string} 
      */
 
-    generateAuthUrlService () {
+    generateAuthUrlService (state) {
         return this.#oauth2Client.generateAuthUrl({
             access_type : "offline",
             scope : ["profile", "email"],
-            prompt : "consent"
+            prompt : "consent",
+            state: state
         })
     }
 
@@ -37,10 +41,11 @@ export default class AuthService {
     }
 
     async handleVerifyToken(tokenId) {
-        return this.#oauth2Client.verifyIdToken({
+        const ticket = await this.#oauth2Client.verifyIdToken({
             idToken : tokenId,
             audience : AuthService.#CLIENT_ID
         })
+        return ticket.getPayload()
     }
 
     async getTokenOnlyAuthService(authCode) {
@@ -65,8 +70,4 @@ export default class AuthService {
         return token.credentials.id_token;
     }
 
-    async getUserData(idToken) {
-        const data = await this.#oauth2Client.verifyIdToken(idToken);
-        return data.getPayload();
-    }
 }

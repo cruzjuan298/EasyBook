@@ -15,7 +15,8 @@ export default function useAppointments() {
 
             const response = await fetch(appointmentUrl, {
                 method: 'GET',
-                headers: API_CONFIG.headers
+                headers: API_CONFIG.headers,
+                credentials: "include"
             });
 
             if (!response.ok) {

@@ -1,5 +1,6 @@
 export const ROUTE_PATHS = {
     HOME : "/",
     INTEGRATONS : "/integrations",
-    DASHBOARD : "/dashboard"    
+    DASHBOARD : "/dashboard",
+    PROFILE : "/profile"    
 }

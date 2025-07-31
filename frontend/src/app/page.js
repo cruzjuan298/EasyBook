@@ -2,9 +2,10 @@ import styles from "./page.module.css"
 import config from "@/config"
 
 export default function Home() {
+  
   return (
     <div className="homne-divs">
-      <nav className={styles.navbar} >
+      <nav className={styles.navbar}>
 
         <div className={styles.navbarTitleDiv1}>
           <a className={styles.navbarTitle}>EasyBook</a>
@@ -24,7 +25,7 @@ export default function Home() {
               <h1 className={styles.heroTitle}>Streamline Your Bookings, Grow Your Business.</h1>
               <p className={styles.heroDescription}> Bookme makes it effortless for small businesses to manage appointments, send automated reminders, and delight clients.</p>
               <div className={styles.heroOptions}>
-                <a className={styles.heroGetStarted} href={config.routes.DASHBOARD}>Get Started Free</a>
+                <a className={styles.heroGetStarted} href={config.routes.DASHBOARD} >Get Started Free</a>
                 <a className={styles.heroLearnMore}>Learn More</a>
               </div>
             </div>
@@ -102,7 +103,7 @@ export default function Home() {
           <div className={styles.ctaDiv}>
             <h2 className={styles.ctaTitle}>Ready to Simplify Your Scheduling? </h2>
             <p className={styles.ctaSubSection}> Become one of the first users of bookme. Start tracking your appointments today! </p>
-            <a className={styles.ctaTrial} href={config.routes.DASHBOARD}>Start For Free </a>
+            <a className={styles.ctaTrial} href={config.routes.DASHBOARD} >Start For Free </a>
           </div>
         </section>
 

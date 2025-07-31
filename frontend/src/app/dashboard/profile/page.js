@@ -1,11 +1,11 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { useState, useRef, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import styles from "./page.module.css"
-import BoardView from "../../components/BoardView/BoardView.js"
-import CalenderView from "../../components/CalenderView/CalenderView.js"
-import ListView from "../../components/ListView/ListView.js"
+import BoardView from "@/components/BoardView/BoardView.js"
+import CalenderView from "@/components/CalenderView/CalenderView.js"
+import ListView from "@/components/ListView/ListView.js"
 import Modal from "@/components/Modals/Modal"
 import { getTime } from "@/utils/Time/DateUItil"
 import useAppointments from "@/hooks/useAppointments.js"
@@ -18,7 +18,7 @@ export default function DashboardPage(){
     const router = useRouter()
     const { loadingAppointments, appointmentsError, appointments, fetchAppointments, updateAppointments, deleteAppointmentOptims } = useAppointments();
     const { singleAppointmentError, fetchAppointment, deleteAppointment } = useSingleAppointment();
-    const { user, isAuthenticated, loadingAuth, error, checkAuthStatus } = useAuth()
+    const { user, isAuthenticated, loadingAuth, error, checkAuthStatus } = useAuth();
     var currentDate = getTime();
     var currentMonth = currentDate.getMonth();
     var currentYear = currentDate.getFullYear(); 
@@ -28,14 +28,22 @@ export default function DashboardPage(){
     const [modalContentType, setModalContentType] = useState(null); // change to edit, delete or whatever
     const [appointmentFocus, setAppointmentFocus] = useState(null);
 
-    useEffect(() => {
-        if (!loadingAuth) {
+     useEffect(() => {
+        if (!loadingAuth){
+            const currentPath = router.pathname;
             if (isAuthenticated) {
-                router.replace(`${config.routes.DASHBOARD}${config.routes.PROFILE}`)
-            } 
+                if (currentPath !== `${config.routes.DASHBOARD}${config.routes.PROFILE}`) {
+                    router.replace(`${config.routes.DASHBOARD}${config.routes.PROFILE}`)
+                }
+            } else {
+                if (currentPath !== `${config.routes.DASHBOARD}`) {
+                    router.replace(config.routes.DASHBOARD)
+                }
+            }
         }
     }, [isAuthenticated, loadingAuth, router])
 
+    
     const handleClose = () => {
         setshowModal(false);
         setModalContentType(null);
@@ -110,6 +118,8 @@ export default function DashboardPage(){
     if (appointmentsError) {
         return <p>Error: {appointmentsError}</p>
     }
+
+    
 
     return(
         <div className={styles.dashboardDiv}>

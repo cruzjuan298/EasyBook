@@ -14,7 +14,8 @@ export default function useSingleAppointment() {
             const url = `${appointmentBaseUrl}/${appointmentId}`
             const response = await fetch(url, {
                 method : "GET",
-                headers: API_CONFIG.headers
+                headers: API_CONFIG.headers,
+                credentials : "include"
             })
 
             if (!response.ok) {
@@ -38,7 +39,8 @@ export default function useSingleAppointment() {
             
             const response = await fetch(url, {
                 method: "DELETE",
-                headers: API_CONFIG.headers
+                headers: API_CONFIG.headers,
+                credentials : "include"
             });
 
             if (!response.ok) {

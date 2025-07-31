@@ -14,28 +14,24 @@ import { authRoutes } from './app/api/routes/Auth.route.js'
 
 const app = express()
 
-app.use(express.json())
 app.use(cookieParser())
+app.use(express.json())
 const PORT = process.env.PORT;
 
 app.use(cors({
     origin: process.env.FRONTEND_BASE_URL,
     methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization', "Cookie"],
+    credentials: true
 }));
+
+app.use("/api/auth", authRoutes);
+
+app.use("/api", authMiddleware);
 
 app.use("/api", bookRoute);
 app.use("/api", retrieveRoutes);
 app.use("/api", deleteRoutes);
-app.use("/api", authRoutes)
-
-app.get("/", async (req, res)  => {
-    const idToken = req.cookies[CookiesService.ID_TOKEN_COOKIE.name];
-    if (!idToken) return res.redirect("/home")
-    
-    return res.redirect("/dashboard") 
-})
-app.use(authMiddleware);
 
 async function startApplication() {
     try {

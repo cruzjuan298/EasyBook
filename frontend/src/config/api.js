@@ -10,7 +10,8 @@ export const API_CONFIG = {
         retrieveAppointments: "/api/appointments",
         retrieveStaffMembers: "/api/staffMembers",
         appointmentById: "/api/appointments/:id",
-        login: "/api/auth/login"
+        login: "/api/auth/login",
+        verifyAuthStatus: "/api/auth/verify"
     },
     apiVersion: "v0.1",
 };

@@ -1,20 +1,22 @@
 import AuthService from "../services/Auth.service.js";
 import CookiesService from "../services/Cookies.service.js";
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+
+dotenv.config({ path: "../../.env"});
 
 export async function authMiddleware(req, res, next) {
-    const idToken = req.cookies[CookiesService.ID_TOKEN_COOKIE.name];
-
-    if (!idTokem) return res.sendStatus(401);
+    const appJWT = req.cookies[CookiesService.APP_JWT.name];
+    console.log(appJWT, req.cookies)
+    if (!appJWT) return res.sendStatus(401);
 
     try {
-        const authService = new AuthService();
-
-        const userData = authService.getUserData(idToken);
-        res.local.user = userData;
+        const decodedAppJWT = jwt.verify(appJWT, process.env.JWT_SECRET)
+        req.user = decodedAppJWT;
         return next()
     } catch (error) {
         console.log("Invalid ID token", error);
-        res.clearCookie(CookiesService.ID_TOKEN_COOKIE.name, CookiesService.ID_TOKEN_COOKIE.cookie);
-        return res.sendStatus(401);
+        res.clearCookie(CookiesService.APP_JWT.name, CookiesService.APP_JWT.cookie);
+        return res.sendStatus(401).json({message : "Unauthorized"});
     }
 }

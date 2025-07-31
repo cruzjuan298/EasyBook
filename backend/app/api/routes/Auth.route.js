@@ -1,10 +1,10 @@
 import express from "express"
-import { sendAuthUrl, oauthRedirect, oauthRefreshToken } from "../controllers/Auth.controller.js"
+import { sendAuthUrl, oauthRedirect, oauthRefreshToken, authVerifyCookies } from "../controllers/Auth.controller.js"
 
 const router = express.Router()
 
-router.get("/auth/login", sendAuthUrl )
-router.get("/auth/callback", oauthRedirect)
-router.get("/auth/refresh", oauthRefreshToken)
-
+router.get("/login", sendAuthUrl )
+router.get("/callback", oauthRedirect)
+router.get("/refresh", oauthRefreshToken)
+router.get("/verify", authVerifyCookies)
 export const authRoutes = router

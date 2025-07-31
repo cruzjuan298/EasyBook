@@ -19,6 +19,7 @@
     font-weight: 500;
     font-size: 1.1rem;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .navbar a:hover {
@@ -107,6 +108,7 @@
 .heroGetStarted{
     color: white;
     background-color: rgb(37 99 235);
+    cursor: pointer;
 } 
 
 .heroLearnMore {
@@ -269,6 +271,7 @@
     background-color: white;
     border-radius: 0.5rem;
     text-decoration: inherit;
+    cursor: pointer;
 }
 
 .footerSection {
