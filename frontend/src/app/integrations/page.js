@@ -1,12 +1,19 @@
 'use client'
+
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Navbar from "@/components/Navbar/Navbar"
 import IntegrationCard from "@/components/Integrations/IntegrationCard"
 import styles from "./page.module.css"
 import config from "@/config"
+import useAuth from "@/hooks/useAutth"
+import Modal from "@/components/Modals/Modal"
 
-export default function Home() {
+export default function Integrations() {
     const router = useRouter();
+    const { user, isAuthenticated, loadingAuth, error, checkAuthStatus, login, logout } = useAuth();
+    const [ showModal, setShowModal] = useState(false);
+    const [ modalContentType, setModalContentType ] = useState(null)
 
     const handleGoDashbaord = () => {
         router.push(config.routes.DASHBOARD);
@@ -16,13 +23,34 @@ export default function Home() {
         router.push(config.routes.HOME)
     }
 
-    const handleLoginButton = () => {
-        router.push(`${config.api.baseURL}${config.api.endpoints.login}`)
+    const handleOnClose = () => {
+        setModalContentType(null);
+        setShowModal(false)
     }
 
-    const handleZoomConnectHandler = () => {
-        
+    const handleLogout = () => {
+        setModalContentType("logout");
+        setShowModal(true)
     }
+
+    if(loadingAuth) {
+        return <h1>Loading Auth status</h1>
+    }
+
+     useEffect(() => {
+        if (!loadingAuth){
+            const currentPath = router.pathname;
+            if (isAuthenticated) {
+                if (currentPath !== `${config.routes.INTEGRATONS}`) {
+                    router.replace(`${config.routes.INTEGRATONS}`)
+                }
+            } else {
+                if (currentPath !== `${config.routes.LOGIN}`) {
+                    router.replace(config.routes.LOGIN)
+                }
+            }
+        }
+    }, [isAuthenticated, loadingAuth, router])
 
     return(
         <div className={styles.homeDiv}>
@@ -40,7 +68,7 @@ export default function Home() {
                         <svg  xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 0 24 24" width="40px" fill="#3b82f6"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
                     </button>
 
-                    <button type="button" className={styles.button} onClick={handleLoginButton}>
+                    <button type="button" className={styles.button} onClick={handleLogout} >
                       <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 20 20" height="40px" viewBox="0 0 20 20" width="40px" fill="#3b82f6"><g><rect fill="none" height="20" width="20"/></g><g><g><path d="M10 2c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 3.5c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 11c-2.05 0-3.87-.95-5.07-2.44 1.45-.98 3.19-1.56 5.07-1.56s3.62.58 5.07 1.56c-1.2 1.49-3.02 2.44-5.07 2.44z"/></g></g></svg>
                     </button>
                 </>
@@ -89,6 +117,10 @@ export default function Home() {
                     />
                     <IntegrationCard />
                 </div>
+            </div>
+
+            <div className={styles.viewDiv}>
+                {<Modal isOpen={showModal} modal={modalContentType} onClose={handleOnClose} handleLogout={logout} />} 
             </div>
         </div>
     )

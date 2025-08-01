@@ -12,7 +12,7 @@ export async function sendAuthUrl(req, res, next) {
     res.cookie(CookiesService.OAUTH_STATE.name, state, CookiesService.OAUTH_STATE.cookie);
 
     const authUrl = authService.generateAuthUrlService(state);
-    res.redirect(authUrl);
+    res.status(200).json({authUrl : authUrl});
 }
 
 export async function oauthRedirect(req, res, next) {
@@ -50,11 +50,14 @@ export async function oauthRedirect(req, res, next) {
 
         if (tokens.refresh_token) {
             res.cookie(CookiesService.GOOGLE_REFRESH_TOKEN.name, tokens.refresh_token, CookiesService.GOOGLE_REFRESH_TOKEN.cookie);
+
         }
 
         res.cookie(CookiesService.APP_JWT.name, appToken, CookiesService.APP_JWT.cookie);
+        res.cookie(CookiesService.GOOGLE_ID_TOKEN.name, tokens.id_token, CookiesService.GOOGLE_ID_TOKEN.cookie);
+        res.cookie(CookiesService.GOOGLE_REFRESH_TOKEN_LOGOUT.name, tokens.refresh_token, CookiesService.GOOGLE_REFRESH_TOKEN_LOGOUT.cookie);
 
-        const frontendSuccessRedirect = process.env.FRONTEND_DASHBOARD_URL
+        const frontendSuccessRedirect = process.env.FRONTEND_DASHBOARD_PROFILE_URL
         res.redirect(frontendSuccessRedirect)
         
     } catch (error) {
@@ -69,21 +72,20 @@ export async function oauthRedirect(req, res, next) {
 }
 
 export async function oauthRefreshToken(req, res, next) {
-    const refreshToken = req.cookies(CookiesService.GOOGLE_REFRESH_TOKEN.name)
+    const refreshToken = req.cookies[CookiesService.GOOGLE_REFRESH_TOKEN.name]
 
     if (!refreshToken) return res.status(401).json({message : "No refresh token provided"});
 
     try {
         const authService = new AuthService();
         const newIdToken = await authService.getNewTokenId(refreshToken);
+        
+        res.cookie(CookiesService.GOOGLE_ID_TOKEN.name, newIdToken, CookiesService.GOOGLE_ID_TOKEN.cookie);
 
-        if(newIdToken.token){
-            res.cookies(CookiesService.GOOGLE_ID_TOKEN.name, newIdToken, CookiesService.GOOGLE_ID_TOKEN.cookie);
-        }
-
-        return res.sendStatus(200).json({message : "Token refreshed"});
+        return res.status(200).json({message : "Token refreshed"});
     } catch (error) {
         res.clearCookie(CookiesService.GOOGLE_REFRESH_TOKEN.name, CookiesService.GOOGLE_REFRESH_TOKEN.cookie)
+        console.log(error)
         return res.sendStatus(401);
     }
 }
@@ -92,6 +94,7 @@ export async function authVerifyCookies(req, res, next) {
         const appJwt = req.cookies[CookiesService.APP_JWT.name];
 
         if (!appJwt) {
+            clearAllCookies(req, res)
             return res.status(401).json({isAuthenticated : false, message  : "Error trying to validate id token"});
         }
 
@@ -104,4 +107,30 @@ export async function authVerifyCookies(req, res, next) {
             res.clearCookie(CookiesService.APP_JWT.name, CookiesService.APP_JWT.cookie)
             return res.status(401).json({isAuthenticated : false, message : `Error failed: ${error} `});
         }
+}
+
+export async function oauthLogout(req, res, next) {
+    const refreshToken = req.cookies[CookiesService.GOOGLE_REFRESH_TOKEN_LOGOUT.name]
+
+    try {
+        const authService = new AuthService();
+        await authService.revokeRefreshTokenAccess(refreshToken);
+
+        clearAllCookies(req, res);
+        res.clearCookie(CookiesService.GOOGLE_REFRESH_TOKEN.name, CookiesService.GOOGLE_REFRESH_TOKEN.cookie)
+        return res.status(200).json({redirectRoute : process.env.FRONTEND_DASHBOARD_URL})
+    } catch (error) {
+        return res.status(401).json({message : "Error trying to logout"})
+    }
+
+}
+
+function clearAllCookies(req, res) {
+    const cookies = req.cookies;
+    for (const cookieName in cookies){
+        res.clearCookie(cookieName); 
+        res.clearCookie(cookieName, { path: "/" });
+        res.clearCookie(cookieName, { path: "/api/auth/callback" });
+        res.clearCookie(cookieName, { path: "/api/auth/logout" });
+    }
 }

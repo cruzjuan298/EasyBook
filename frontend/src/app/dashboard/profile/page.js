@@ -18,7 +18,7 @@ export default function DashboardPage(){
     const router = useRouter()
     const { loadingAppointments, appointmentsError, appointments, fetchAppointments, updateAppointments, deleteAppointmentOptims } = useAppointments();
     const { singleAppointmentError, fetchAppointment, deleteAppointment } = useSingleAppointment();
-    const { user, isAuthenticated, loadingAuth, error, checkAuthStatus } = useAuth();
+    const { user, isAuthenticated, loadingAuth, error, checkAuthStatus, logout} = useAuth();
     var currentDate = getTime();
     var currentMonth = currentDate.getMonth();
     var currentYear = currentDate.getFullYear(); 
@@ -78,8 +78,9 @@ export default function DashboardPage(){
         router.push(config.routes.INTEGRATONS)
     }
 
-    const handleLoginButton = () => {
-        router.push(`${config.api.baseURL}${config.api.endpoints.login}`)
+    const handleLogout = () => {
+        setshowModal(true)
+        setModalContentType("logout");
     }
 
     const handleDeleteAppointment = async (appointmentId) => {
@@ -137,7 +138,7 @@ export default function DashboardPage(){
                         <svg  xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 0 24 24" width="40px" fill="#3b82f6"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
                     </button>
 
-                    <button type="button" className={styles.button} onClick={handleLoginButton}>
+                    <button type="button" className={styles.button} onClick={handleLogout}>
                     <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 20 20" height="40px" viewBox="0 0 20 20" width="40px" fill="#3b82f6"><g><rect fill="none" height="20" width="20"/></g><g><g><path d="M10 2c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 3.5c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 11c-2.05 0-3.87-.95-5.07-2.44 1.45-.98 3.19-1.56 5.07-1.56s3.62.58 5.07 1.56c-1.2 1.49-3.02 2.44-5.07 2.44z"/></g></g></svg>                    
                     </button>
                 </>
@@ -149,7 +150,7 @@ export default function DashboardPage(){
                 </div>
                 <div className={styles.viewDiv}>
                         {renderView(view)}
-                        {<Modal isOpen={showModal} onClose={handleClose} onAdd={handleAddAppointment} modal={modalContentType} onDelete={handleDeleteAppointment} appointmentFocus={appointmentFocus} />} 
+                        {<Modal isOpen={showModal} onClose={handleClose} onAdd={handleAddAppointment} modal={modalContentType} onDelete={handleDeleteAppointment} appointmentFocus={appointmentFocus} handleLogout={logout} />} 
                 </div>
         </div>
     )

@@ -70,4 +70,7 @@ export default class AuthService {
         return token.credentials.id_token;
     }
 
+    async revokeRefreshTokenAccess(refreshToken){
+        await this.#oauth2Client.revokeToken(refreshToken);
+    }
 }

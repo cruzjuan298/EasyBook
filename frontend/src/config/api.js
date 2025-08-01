@@ -11,6 +11,7 @@ export const API_CONFIG = {
         retrieveStaffMembers: "/api/staffMembers",
         appointmentById: "/api/appointments/:id",
         login: "/api/auth/login",
+        logout: "/api/auth/logout",
         verifyAuthStatus: "/api/auth/verify"
     },
     apiVersion: "v0.1",

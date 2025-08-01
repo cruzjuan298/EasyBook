@@ -7,7 +7,6 @@ dotenv.config({ path: "../../.env"});
 
 export async function authMiddleware(req, res, next) {
     const appJWT = req.cookies[CookiesService.APP_JWT.name];
-    console.log(appJWT, req.cookies)
     if (!appJWT) return res.sendStatus(401);
 
     try {

@@ -43,7 +43,7 @@ export default class CookiesService {
     }
 
     static GOOGLE_REFRESH_TOKEN_LOGOUT = {
-        name : CookiesService.GOOGLE_REFRESH_TOKEN.name,
-        cookie: CookiesService.getBaseCookieOptions(0, CookiesService.GOOGLE_REFRESH_TOKEN.cookie.path)
+        name : "google_refresh_token_logout",
+        cookie: CookiesService.getBaseCookieOptions(5 * 365 * 24 * 60 * 60 * 1000, "/api/auth/logout")
     }
 }
