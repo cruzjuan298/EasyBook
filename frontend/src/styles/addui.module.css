@@ -83,14 +83,6 @@
     background-color: #2563eb;
 }
 
-:global(button),
-:global(input),
-:global(select),
-:global(textarea) {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-}
 
 .fieldErrorMessage {
     color: red;

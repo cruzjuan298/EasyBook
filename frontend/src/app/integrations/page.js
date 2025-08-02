@@ -15,6 +15,21 @@ export default function Integrations() {
     const [ showModal, setShowModal] = useState(false);
     const [ modalContentType, setModalContentType ] = useState(null)
 
+    useEffect(() => {
+        if (!loadingAuth){
+            const currentPath = router.pathname;
+                if (isAuthenticated) {
+                    if (currentPath !== `${config.routes.INTEGRATONS}`) {
+                        router.replace(`${config.routes.INTEGRATONS}`)
+                    }
+                } else {
+                    if (currentPath !== `${config.routes.LOGIN}`) {
+                        router.replace(config.routes.LOGIN)
+                    }
+                }
+            }
+    }, [isAuthenticated, loadingAuth, router])
+
     const handleGoDashbaord = () => {
         router.push(config.routes.DASHBOARD);
     }
@@ -36,21 +51,6 @@ export default function Integrations() {
     if(loadingAuth) {
         return <h1>Loading Auth status</h1>
     }
-
-     useEffect(() => {
-        if (!loadingAuth){
-            const currentPath = router.pathname;
-            if (isAuthenticated) {
-                if (currentPath !== `${config.routes.INTEGRATONS}`) {
-                    router.replace(`${config.routes.INTEGRATONS}`)
-                }
-            } else {
-                if (currentPath !== `${config.routes.LOGIN}`) {
-                    router.replace(config.routes.LOGIN)
-                }
-            }
-        }
-    }, [isAuthenticated, loadingAuth, router])
 
     return(
         <div className={styles.homeDiv}>
@@ -115,7 +115,6 @@ export default function Integrations() {
                     }
                     
                     />
-                    <IntegrationCard />
                 </div>
             </div>
 

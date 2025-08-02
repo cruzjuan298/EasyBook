@@ -5,3 +5,11 @@ html, body {
     margin: 0;
     background-color: #f8fafc;
 }
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}

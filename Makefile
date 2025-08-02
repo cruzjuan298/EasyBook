@@ -20,10 +20,6 @@ run-frontend:
 	@echo "Running frontend"
 	cd frontend && npm run dev -- --port 3000
 
-build-frontend:
-	@echo "Building frontend"
-	cd frontend && npm run build
-
 start:
 	 concurrently "make run-frontend" "make run-backend"
 

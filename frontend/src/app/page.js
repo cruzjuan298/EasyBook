@@ -1,5 +1,6 @@
 import styles from "./page.module.css"
 import config from "@/config"
+import Image from "next/image"
 
 export default function Home() {
   
@@ -22,8 +23,8 @@ export default function Home() {
         <section className={styles.hero}>
           <div className={styles.heroDiv}>
             <div className={styles.heroTextComponents}>
-              <h1 className={styles.heroTitle}>Streamline Your Bookings, Grow Your Business.</h1>
-              <p className={styles.heroDescription}> Bookme makes it effortless for small businesses to manage appointments, send automated reminders, and delight clients.</p>
+              <h1 className={styles.heroTitle}>Streamline Your Bookings, All in one place.</h1>
+              <p className={styles.heroDescription}> EasyBook makes it effortless for you to manage appointments, send automated reminders, and delight clients.</p>
               <div className={styles.heroOptions}>
                 <a className={styles.heroGetStarted} href={config.routes.DASHBOARD} >Get Started Free</a>
                 <a className={styles.heroLearnMore}>Learn More</a>
@@ -31,7 +32,7 @@ export default function Home() {
             </div>
 
             <div className={styles.heroMockComponents}>
-              <img className={styles.heroMockImg} src="https://placehold.co/600x400/E0F2FE/2196F3?text=App+Mockup" />
+              <Image className={styles.heroMockImg} src="https://placehold.co/600x400/E0F2FE/2196F3?text=App+Mockup" alt="mock-product-img"/>
             </div>
           </div>
 
