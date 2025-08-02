@@ -1,4 +1,4 @@
-# Calender Integration App
+# Calendar Integration App
 
 ## Overview
 This project helps users manage and organize their schedules efficiently, allowing them to create events, set reminders, and view their commitments in a clear, intuitive interface.
@@ -13,7 +13,7 @@ This project helps users manage and organize their schedules efficiently, allowi
 ### Prerequisites
 - Node.js 
 - A JS package manager
-- NOTE: nodemon is used to start the server in the makefile to automatically restart the server whenever changes are detected in your backend files. If you encounter issues with running the backend, please ensure nodemon is installed. You can find documentation [here](https://www.npmjs.com/package/concurrently#installation).
+- **Note**: nodemon is used to start the server in the makefile to automatically restart the server whenever changes are detected in your backend files. If you encounter issues with running the backend, please ensure nodemon is installed. You can find documentation [here](https://www.npmjs.com/package/nodemon).
 
 ### Installation
 1. Clone the repository and install dependencies:
@@ -28,13 +28,14 @@ This project helps users manage and organize their schedules efficiently, allowi
     ```sh
     cp .env.example .env
    ```
-2. Open the newly created .env file and fill in the required values. Here's an example of what you might see:
+2. Open the newly created `.env` file and fill in the required values. Here's an example of what you might see:
+   ```env
+   URL="your mongodb or other db uri"
+   JWT_SECRET="your_super_secret_jwt_key"
+   PORT=3000
+   ```
 
-    URL="your mongodb or other db uri"
-    JWT_SECRET="your_super_secret_jwt_key"
-    PORT=3000
-
-3. Now, navigate to the frontend directory and copy the sample just as in the backend. Fill in the required value(s) aswell.
+3. Now, navigate to the frontend directory and copy the sample just as in the backend. Fill in the required value(s) as well.
 
 ### Running the Backend
 1. Navigate to the backend directory:
@@ -48,7 +49,7 @@ This project helps users manage and organize their schedules efficiently, allowi
 
    OR
 
-1. Run with the make file:
+1. Run with the `Makefile`:
     ```sh
    make run-backend
     ```
@@ -58,7 +59,7 @@ This project helps users manage and organize their schedules efficiently, allowi
    ```sh
    cd frontend
    ```
-2. Build the frontend (can skip this is you just want to preview the frontend):
+2. Build the frontend (can skip this if you just want to preview):
    ```sh
    npm run build
    ```
@@ -69,7 +70,7 @@ This project helps users manage and organize their schedules efficiently, allowi
 
    OR
 
-1. Use the make file to start the frontend:
+1. Use the `Makefile` to start the frontend:
    ```sh
    make run-frontend
    ```
