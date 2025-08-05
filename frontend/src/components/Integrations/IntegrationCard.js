@@ -1,6 +1,6 @@
 import styles from "@/styles/integrationCard.module.css"
 
-export default function IntegrationCard({ title, icon, connectHandler, ManageHandler }) {
+export default function IntegrationCard({ title, icon, connectHandler }) {
     return(
         <div className={styles.cardContainer}>
             <div className={styles.cardHeader}>

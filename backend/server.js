@@ -11,6 +11,7 @@ import { bookRoute} from "./app/api/routes/Book.route.js"
 import { retrieveRoutes } from './app/api/routes/Retrieve.route.js'
 import { deleteRoutes } from './app/api/routes/Delete.route.js'
 import { authRoutes } from './app/api/routes/Auth.route.js'
+import { googleCalendarRouter } from './app/api/routes/GoogleCalendar.route.js'
 
 const app = express()
 
@@ -28,10 +29,11 @@ app.use(cors({
 app.use("/api/auth", authRoutes);
 
 app.use("/api", authMiddleware);
-
+// protected routes MUST come before the auth middleware. In short the middleware prevents the use of these routes if a valid jwt token isn't avilable.
 app.use("/api", bookRoute);
 app.use("/api", retrieveRoutes);
 app.use("/api", deleteRoutes);
+app.use("/api", googleCalendarRouter);
 
 async function startApplication() {
     try {

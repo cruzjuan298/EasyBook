@@ -10,6 +10,8 @@ export async function authMiddleware(req, res, next) {
     if (!appJWT) return res.sendStatus(401);
 
     try {
+        const authService = new AuthService()
+    
         const decodedAppJWT = jwt.verify(appJWT, process.env.JWT_SECRET)
         req.user = decodedAppJWT;
         return next()

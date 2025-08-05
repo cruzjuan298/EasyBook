@@ -20,7 +20,7 @@ export default function useAuth() {
             if (response.ok) {
                 const data = await response.json();
                 setIsAuthenticated(true);
-                setUser(data)
+                setUser(data.data)
             } else {
                 setIsAuthenticated(false);
                 setUser(null);

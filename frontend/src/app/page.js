@@ -32,7 +32,7 @@ export default function Home() {
             </div>
 
             <div className={styles.heroMockComponents}>
-              <Image className={styles.heroMockImg} src="https://placehold.co/600x400/E0F2FE/2196F3?text=App+Mockup" alt="mock-product-img"/>
+              <Image className={styles.heroMockImg} width="600" height="600" src="https://placehold.co/600x400/E0F2FE/2196F3.png?text=App+Mockup" alt="mock-product-img"/>
             </div>
           </div>
 

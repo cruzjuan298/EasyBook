@@ -30,7 +30,7 @@ export default class AuthService {
     generateAuthUrlService (state) {
         return this.#oauth2Client.generateAuthUrl({
             access_type : "offline",
-            scope : ["profile", "email"],
+            scope : ["profile", "email", "https://www.googleapis.com/auth/calendar.events.readonly", "https://www.googleapis.com/auth/calendar.readonly"],
             prompt : "consent",
             state: state
         })
@@ -38,6 +38,21 @@ export default class AuthService {
 
     handleSetCredentials(tokens){
         this.#oauth2Client.setCredentials(tokens);
+    }
+
+    setCredentialsOptionalTokens(tokens = {}){
+        const { accessToken, refreshToken } = tokens;
+
+        const credentials = {}
+            if (accessToken) {
+                credentials.access_token = accessToken;
+            }
+
+            if (refreshToken) {
+                credentials.refresh_token = refreshToken;
+            }
+            
+        this.#oauth2Client.setCredentials(credentials)
     }
 
     async handleVerifyToken(tokenId) {
@@ -61,6 +76,10 @@ export default class AuthService {
             accessToken : token.access_token,
             refreshToken : token.refresh_token
         };
+    }
+
+    async getAccessToken(){
+        return await this.#oauth2Client.getAccessToken();
     }
 
     async getNewTokenId(refreshToken) {

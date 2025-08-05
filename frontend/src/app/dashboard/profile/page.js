@@ -42,7 +42,6 @@ export default function DashboardPage(){
             }
         }
     }, [isAuthenticated, loadingAuth, router])
-
     
     const handleClose = () => {
         setshowModal(false);
@@ -120,13 +119,17 @@ export default function DashboardPage(){
         return <p>Error: {appointmentsError}</p>
     }
 
+    const userName = loadingAuth
+    ? "Loading.."
+    : isAuthenticated && user.name
+        ? user.name
+        : "";
     
-
     return(
         <div className={styles.dashboardDiv}>
             <Navbar 
             leftSideChildren={
-                <h1 className={styles.title}>Schedule</h1>
+                <h1 className={styles.title}> {userName} Schedule</h1>
             }
             rightSideChildren={
                 <>

@@ -48,6 +48,26 @@ export default function Integrations() {
         setShowModal(true)
     }
 
+    const handleIntegrateGoogleCalendar =  async () => {
+        try {
+            const response = await fetch(`${config.api.baseURL}${config.api.endpoints.googleCalendarInfo}`,{
+                method : "GET",
+                credentials : "include"
+            })
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => response.text());
+                throw new Error(`Failed to integrate google calendar events: ${response.status} - ${errorData.message}`);
+            }
+
+            const data = await response.json();
+            console.log(data)
+
+        } catch (error) {
+            console.warn("Error trying to integrate users google calendar: ", error)
+        }
+    }
+
     if(loadingAuth) {
         return <h1>Loading Auth status</h1>
     }
@@ -85,7 +105,7 @@ export default function Integrations() {
                     }
                     />
                     <IntegrationCard
-                    title={"Google Calender"}
+                    title={"Google Calendar"}
                     icon={
                         <>
                         <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 200 200" enableBackground="new 0 0 200 200" xmlSpace="preserve">
@@ -105,6 +125,7 @@ export default function Integrations() {
                             </svg>
                         </>
                     }
+                    connectHandler={handleIntegrateGoogleCalendar}
                     />
                     <IntegrationCard 
                     title={"Notion"}

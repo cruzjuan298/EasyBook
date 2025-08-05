@@ -12,7 +12,8 @@ export const API_CONFIG = {
         appointmentById: "/api/appointments/:id",
         login: "/api/auth/login",
         logout: "/api/auth/logout",
-        verifyAuthStatus: "/api/auth/verify"
+        verifyAuthStatus: "/api/auth/verify",
+        googleCalendarInfo : "/api/google-calendar-info/events"
     },
     apiVersion: "v0.1",
 };
