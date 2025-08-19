@@ -1,6 +1,6 @@
 import styles from "../../styles/boardAppointment.module.css"
-import EditButton from "../Edit/editButton"
-import DeleteButton from "../Edit/deleteButton"
+import EditButton from "../Edit/editButton.js"
+import DeleteButton from "../Edit/deleteButton.js"
 import DeleteConfirmation from "@/components/Modals/Modal-DeleteUI/DeleteUI"
 
 export default function BoardAppointment({ onDeleteClick, clientName, date, service, time, appointmentId}){

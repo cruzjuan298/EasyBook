@@ -80,6 +80,7 @@ export default function useAuth() {
             const data = await response.json();
             const redirecthUrl = data.redirectRoute; 
 
+            console.log(redirecthUrl)
             window.location.href = redirecthUrl;
         } catch (error) {
             setError(error)

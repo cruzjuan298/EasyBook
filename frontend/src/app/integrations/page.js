@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar/Navbar"
 import IntegrationCard from "@/components/Integrations/IntegrationCard"
 import styles from "./page.module.css"
 import config from "@/config"
-import useAuth from "@/hooks/useAutth"
+import useAuth from "@/hooks/useAuth"
 import Modal from "@/components/Modals/Modal"
 
 export default function Integrations() {

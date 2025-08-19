@@ -12,7 +12,7 @@ import useAppointments from "@/hooks/useAppointments.js"
 import useSingleAppointment from "@/hooks/useSingleAppointment.js"
 import Navbar from "@/components/Navbar/Navbar"
 import config from "@/config"
-import useAuth from "@/hooks/useAutth"
+import useAuth from "@/hooks/useAuth"
 
 export default function DashboardPage(){
     const router = useRouter()

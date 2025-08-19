@@ -12,7 +12,7 @@ import useAppointments from "@/hooks/useAppointments.js"
 import useSingleAppointment from "@/hooks/useSingleAppointment.js"
 import Navbar from "@/components/Navbar/Navbar"
 import config from "@/config"
-import useAuth from "@/hooks/useAutth"
+import useAuth from "@/hooks/useAuth"
 
 export default function DashboardPage(){
     const router = useRouter()
@@ -68,7 +68,7 @@ export default function DashboardPage(){
     }
 
     const handleGoIntegrations = () => {
-        router.push(config.routes.INTEGRATONS)
+        router.push(config.routes.LOGIN)
     }
 
     const handleDeleteAppointment = async (appointmentId) => {

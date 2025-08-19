@@ -4,7 +4,7 @@ import styles from "./page.module.css"
 import Navbar from "@/components/Navbar/Navbar"
 import config from "@/config";
 import { useRouter } from "next/navigation"
-import useAuth from "@/hooks/useAutth";
+import useAuth from "@/hooks/useAuth";
 
 export default function Login() {
     const router = useRouter(); 

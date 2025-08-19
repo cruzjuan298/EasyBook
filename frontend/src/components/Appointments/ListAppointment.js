@@ -1,6 +1,6 @@
 import styles from "@/styles/listappointment.module.css"
-import EditButton from "../Edit/editButton"
-import DeleteButton from "../Edit/deleteButton"
+import EditButton from "../Edit/editButton.js"
+import DeleteButton from "../Edit/deleteButton.js"
 
 export default function ListAppointment({ time, client, service, staffMember, onDeleteClick, appointmentId }) {
     const handleDeleteEvent = () => {

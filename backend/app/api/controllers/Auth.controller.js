@@ -10,7 +10,7 @@ export async function sendAuthUrl(req, res, next) {
 
     const state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     res.cookie(CookiesService.OAUTH_STATE.name, state, CookiesService.OAUTH_STATE.cookie);
-
+    
     const authUrl = authService.generateAuthUrlService(state);
     res.status(200).json({authUrl : authUrl});
 }

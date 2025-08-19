@@ -21,7 +21,7 @@ run-frontend:
 	cd frontend && npm run dev -- --port 3000
 
 start:
-	 concurrently "make run-frontend" "make run-backend"
+	concurrently "make run-frontend" "make run-backend"
 
 clean:
 	@echo "Cleanning node modules"
