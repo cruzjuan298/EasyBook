@@ -26,13 +26,12 @@ app.use(cors({
     credentials: true
 }));
 
-app.use("/api/auth", authRoutes);
-
-app.use("/api", authMiddleware);
-// protected routes MUST come before the auth middleware. In short the middleware prevents the use of these routes if a valid jwt token isn't avilable.
 app.use("/api", bookRoute);
 app.use("/api", retrieveRoutes);
 app.use("/api", deleteRoutes);
+app.use("/api/auth", authRoutes);
+
+app.use("/api", authMiddleware);
 app.use("/api", googleCalendarRouter);
 
 async function startApplication() {

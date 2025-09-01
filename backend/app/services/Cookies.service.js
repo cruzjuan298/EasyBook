@@ -16,10 +16,10 @@ export default class CookiesService {
             }
             return options
         }
-    
+    // changing access token time for development purposes 
     static APP_JWT = {
         name : "app_jwt",
-        cookie: CookiesService.getBaseCookieOptions(60 * 60 * 1000, "/")
+        cookie: CookiesService.getBaseCookieOptions(60 * 60 * 1000 * 5, "/")
     }
 
     static OAUTH_STATE = {

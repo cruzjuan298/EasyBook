@@ -3,7 +3,7 @@ import AuthService from "../../services/Auth.service.js"
 import CookiesService from "../../services/Cookies.service.js"
 
 export async function getCalendarInfo(req, res, next)  {
-    const refreshToken = req.cookies[CookiesService.GOOGLE_REFRESH_TOKEN.name];
+    const refreshToken = req.cookies[CookiesService.GOOGLE_ID_TOKEN.name];
     
     if (!refreshToken) {
         res.status(401).json({messgae : "invalid token"});
