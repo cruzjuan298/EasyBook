@@ -35,11 +35,14 @@ export default class AuthService {
             state: state
         })
     }
-
+    
+    // for this to work, make sure the token is set as an object. Will get a missing 'x-toke' error if not.
     handleSetCredentials(tokens){
         this.#oauth2Client.setCredentials(tokens);
     }
-
+    
+    // the names of the fields have to exactly match those of which this function is upacking
+    // an error will b thrown if thats not the case
     setCredentialsOptionalTokens(tokens = {}){
         const { accessToken, refreshToken } = tokens;
 

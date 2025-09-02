@@ -34,7 +34,7 @@ export default class CookiesService {
 
     static GOOGLE_ID_TOKEN = { 
         name: "google_id_token",
-        cookie: CookiesService.getBaseCookieOptions(5 * 60 * 1000, "/" )
+        cookie: CookiesService.getBaseCookieOptions(5 * 60 * 1000 * 60, "/" )
     };
 
     static APP_JWT_LOGOUT = {

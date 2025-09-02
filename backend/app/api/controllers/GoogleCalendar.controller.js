@@ -12,10 +12,10 @@ export async function getCalendarInfo(req, res, next)  {
     try {
         const authService = new AuthService();
 
-        authService.setCredentialsOptionalTokens({refresh_token : refreshToken })        
+        authService.setCredentialsOptionalTokens({refreshToken : refreshToken })        
 
         const access_token = await authService.getAccessToken();
-        authService.handleSetCredentialsWAccessToken(access_token);
+        authService.handleSetCredentialsWAccessToken({access_token : access_token});
 
         const calendar = google.calendar({version : "v3", auth : authService});
         const calendarListResponse = await calendar.calendarList();
@@ -58,6 +58,6 @@ export async function getCalendarInfo(req, res, next)  {
             events : allEvents
         })
     } catch (error) {
-        return res.status(401).json({messgae : "Error trying to retrrieve calendar information."})
+        return res.status(401).json({messgae : `Error trying to retrrieve calendar information. ${error}`})
     }
 }
