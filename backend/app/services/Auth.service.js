@@ -1,7 +1,4 @@
 import { OAuth2Client } from "google-auth-library";
-import dotenv from "dotenv"
-
-dotenv.config({ path: "../../.env"});
 
 export default class AuthService {
     static #CLIENT_ID = process.env.GOOGLE_CLIENT_ID
@@ -30,8 +27,7 @@ export default class AuthService {
     generateAuthUrlService (state) {
         return this.#oauth2Client.generateAuthUrl({
             access_type : "offline",
-            scope : ["profile", "email", "https://www.googleapis.com/auth/calendar.events.readonly", "https://www.googleapis.com/auth/calendar.readonly"],
-            prompt : "consent",
+            scope : ["profile", "email", "https://www.googleapis.com/auth/calendar.events.readonly", "https://www.googleapis.com/auth/calendar.readonly", "https://www.googleapis.com/auth/calendar"],
             state: state
         })
     }

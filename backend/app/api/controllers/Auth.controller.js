@@ -1,9 +1,6 @@
 import jwt from "jsonwebtoken"
 import AuthService from "../../services/Auth.service.js"
 import CookiesService from "../../services/Cookies.service.js"
-import dotenv from "dotenv"
-
-dotenv.config({ path: "../../.env"});
 
 export async function sendAuthUrl(req, res, next) {
     const authService = new AuthService()

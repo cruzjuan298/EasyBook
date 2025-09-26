@@ -3,12 +3,12 @@ import AuthService from "../../services/Auth.service.js"
 import CookiesService from "../../services/Cookies.service.js"
 
 export async function getCalendarInfo(req, res, next)  {
-    const refreshToken = req.cookies[CookiesService.GOOGLE_ID_TOKEN.name];
+    const refreshToken = req.cookies[CookiesService.GOOGLE_REFRESH_TOKEN.name];
     
     if (!refreshToken) {
-        res.status(401).json({messgae : "invalid token"});
+        return res.status(401).json({messgae : "invalid token"});
     }
-
+    console.log(`refresh token: ${refreshToken}`)
     try {
         const authService = new AuthService();
 
@@ -16,7 +16,7 @@ export async function getCalendarInfo(req, res, next)  {
 
         const access_token = await authService.getAccessToken();
         authService.handleSetCredentialsWAccessToken({access_token : access_token});
-
+        
         const calendar = google.calendar({version : "v3", auth : authService});
         const calendarListResponse = await calendar.calendarList();
 

@@ -1,7 +1,3 @@
-import dotenv from "dotenv"
-
-dotenv.config({ path: "../../.env"});
-
 export default class CookiesService {
     static getBaseCookieOptions(maxAgeMs = null, path="/") {
         const options = {
@@ -29,7 +25,7 @@ export default class CookiesService {
 
     static GOOGLE_REFRESH_TOKEN = {
         name : "google_refresh_token",
-        cookie: CookiesService.getBaseCookieOptions(5 * 365 * 24 * 60 * 60 * 1000, "/api/auth/refresh" )
+        cookie: CookiesService.getBaseCookieOptions(5 * 365 * 24 * 60 * 60 * 1000, "/" )
     }
 
     static GOOGLE_ID_TOKEN = { 

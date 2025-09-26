@@ -2,6 +2,7 @@ import AddUI from "./Modal-AddUI/AddUI"
 import Login from "./Modal-AuthUI/Login";
 import Logout from "./Modal-AuthUI/Logout";
 import DeleteConfirmation from "./Modal-DeleteUI/DeleteUI";
+import ErrorUI from "./Modal-ErrorUI/ErrorUI";
 import styles from "@/styles/modal.module.css"
 
 //isOpen is the current state from page.js and onClose is the event that determines what
@@ -19,6 +20,8 @@ export default function Modal({ isOpen, onClose, onAdd, modal, onDelete, appoint
                 return <Login onClose={onClose} handleLogin={handleLogin}/>
             case "logout" :
                 return <Logout onClose={onClose} handleLogout={handleLogout} />
+            case "error" :
+                return <ErrorUI /> 
             default:
                 return null;
         }
