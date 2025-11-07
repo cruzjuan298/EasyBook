@@ -62,38 +62,11 @@ export default function useAuth() {
         }
     }, [])
 
-    const logout = useCallback(async () => {
-        setLoading(true);
-        setError(null);
-
-        try {
-            const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.logout}`, {
-                method: "GET",
-                credentials : "include"
-            })
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => response.text());
-                throw new Error(`Failed to initiate login: ${response.status} - ${errorData.message}`);
-            }
-
-            const data = await response.json();
-            const redirecthUrl = data.redirectRoute; 
-
-            console.log(redirecthUrl)
-            window.location.href = redirecthUrl;
-        } catch (error) {
-            setError(error)
-            setIsAuthenticated(false)
-        } finally {
-            setLoading(false)
-        }
-    }, [])
 
     useEffect(()=> {
         checkAuthStatus();
     }, [checkAuthStatus])
 
-    return {user, isAuthenticated, loading, error, checkAuthStatus, login, logout}
+    return {user, isAuthenticated, loading, error, checkAuthStatus, login }
 
 }
