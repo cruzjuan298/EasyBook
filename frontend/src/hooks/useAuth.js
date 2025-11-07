@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { use, useCallback, useEffect, useState } from "react";
 import { API_CONFIG } from "@/config/api";
 
 export default function useAuth() {
@@ -62,11 +62,36 @@ export default function useAuth() {
         }
     }, [])
 
+    const logout = useCallback(async () => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.logout}`, {
+                method: "GET",
+                credentials : "include"
+            })
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => response.text());
+                throw new Error(`Failed to initiate logout: ${response.status} - ${errorData.message}`);
+            }
+
+            const data = await response.json();
+            setIsAuthenticated(false);
+            setUser(null);
+        } catch (error) {
+            setError(error)
+            setIsAuthenticated(false)
+        } finally {
+            setLoading(false)
+        }
+    }, [])                                                  
 
     useEffect(()=> {
         checkAuthStatus();
     }, [checkAuthStatus])
 
-    return {user, isAuthenticated, loading, error, checkAuthStatus, login }
+    return {user, isAuthenticated, loading, error, checkAuthStatus, login, logout}
 
 }
